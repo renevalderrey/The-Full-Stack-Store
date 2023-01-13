@@ -1,0 +1,20 @@
+.container {
+  height: 49px;
+  margin-top: 21px;
+  margin-bottom: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+  background: var(--clr-10-05);
+  border-radius: 14px;
+  box-shadow: rgb(0 0 0 / 63%) 0px 20px 30px;
+  border-right: 2.1px solid var(--clr-0-025);
+  border-bottom: 2.1px solid var(--clr-0-025);
+  backdrop-filter: blur(1.4px);
+}
+.title {
+  font-size: 21px;
+  color: var(--clr-3);
+  text-decoration: none;
+}

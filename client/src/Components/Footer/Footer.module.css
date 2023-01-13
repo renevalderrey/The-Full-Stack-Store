@@ -1,0 +1,10 @@
+.colors {
+  color: dimgray;
+  font-size: 17px;
+}
+.container {
+  height: 112px;
+  position: relative;
+  background: linear-gradient(#979797, rgb(255, 255, 255), #ffffff);
+  z-index: 1;
+}

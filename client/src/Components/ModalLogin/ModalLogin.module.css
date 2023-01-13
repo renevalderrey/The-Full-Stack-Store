@@ -1,0 +1,14 @@
+.boton {
+  width: 140px;
+  border: none;
+  border-radius: 7px;
+  background: var(--clr-7-R);
+  color: var(--clr-0);
+}
+.boton2 {
+  width: 140px;
+  border: none;
+  border-radius: 7px;
+  background: var(--clr-7-R);
+  color: var(--clr-0);
+}

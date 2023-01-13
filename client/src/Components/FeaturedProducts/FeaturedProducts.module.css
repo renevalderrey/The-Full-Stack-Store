@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 21px;
+  margin-bottom: 21px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* hacer responsive css */
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    width: 100%;
+  }
+}
