@@ -16,6 +16,7 @@
     "axios": "^1.2.2",
     "boostrap": "^2.0.0",
     "cloudinary-react": "^1.8.1",
+    "css-minimizer-webpack-plugin": "^4.2.2",
     "gapi-script": "^1.2.0",
     "lodash": ">=4.0",
     "nodemon": "^2.0.20",
