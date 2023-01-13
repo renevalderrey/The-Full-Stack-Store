@@ -9,7 +9,7 @@
   box-shadow: rgb(0 0 0 / 63%) 0px 20px 30px;
   border-right: 2.1px solid var(--clr-0-025);
   border-bottom: 2.1px solid var(--clr-0-025);
-  aspect-ratio: 1/1.9;
+  aspect-ratio: 1.9;
 }
 .item1 {
   grid-column-start: 1;
@@ -29,7 +29,7 @@
 }
 .prodImg {
   width: 90%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1;
   object-fit: contain;
 }
 .item3 {
