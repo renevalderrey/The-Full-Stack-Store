@@ -7,7 +7,6 @@
   align-items: center;
 }
 
-/* hacer responsive css */
 
 @media (max-width: 768px) {
   .container {
