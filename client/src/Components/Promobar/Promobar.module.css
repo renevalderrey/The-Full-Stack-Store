@@ -1,7 +1,6 @@
 .container {
   height: 49px;
-  margin-top: 21px;
-  margin-bottom: 21px;
+  margin: 21px;
   display: flex;
   align-items: center;
   justify-content: center;

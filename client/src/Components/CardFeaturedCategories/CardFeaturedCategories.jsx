@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 
 export default function CardFeaturedCategories() {
   return (
-    <>
-      <Link>
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="./image/carcasas.png" />
-          <Card.Body>
-            <Card.Title>Carcasas</Card.Title>
-          </Card.Body>
-        </Card>
-      </Link>
-    </>
+    <Link>
+    
+      <Card style={{ width: "18rem" }}>
+        <Card.Img variant="top" src="./image/tdv(1).webp" />
+        <Card.Body>
+          <Card.Title>Tarjetas de Video</Card.Title>
+        </Card.Body>
+      </Card>
+    
+    </Link>
   );
 }
+
+

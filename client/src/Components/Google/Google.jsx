@@ -9,7 +9,7 @@ const Google = () => {
     useEffect(() => {
         const initClient = () => {
             gapi.client.init({
-                clientId: "129986506445-9mk1sot3aovnkj0gokj1dirgg2bposhh.apps.googleusercontent.com",
+                clientId: process.env.REACT_APP_GOOGLE_ID,
                 scope: ''
             });
         };
@@ -18,17 +18,18 @@ const Google = () => {
 
     const onSuccess = (res) => {
         user.push(res.profileObj.email)
+        console.log(res)
         alert("Sesión iniciada")
     };
 
     const onFailure = (err) => {
-        alert('failed:', err);
+        if (err.length > 0) alert('failed:', err);
     };
 
     return (
         <>
             <GoogleLogin
-                clientId="129986506445-9mk1sot3aovnkj0gokj1dirgg2bposhh.apps.googleusercontent.com"
+                clientId={process.env.REACT_APP_GOOGLE_ID}
                 buttonText="Inicia sesión con Google"
                 onSuccess={onSuccess}
                 onFailure={onFailure}

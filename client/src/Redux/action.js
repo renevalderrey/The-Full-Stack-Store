@@ -148,7 +148,6 @@ export const signUp = (payload) => {
       res.data.message !== undefined
         ? alert(res.data.message)
         : alert("Usuario creado correctamente");
-      console.log(res);
     } catch (error) {
       return { error: error.message };
     }

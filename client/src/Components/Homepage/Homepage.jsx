@@ -11,7 +11,6 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../Redux/action";
 import stl from "./Homepage.module.css";
-import Container from "react-bootstrap/Container";
 
 export default function Homepage() {
   const Products = useSelector((state) => state.products);
@@ -31,7 +30,7 @@ export default function Homepage() {
         </div>
       ) : (
         <>
-          <Container fluid>
+          <div>
             <Promobar />
             <Header />
             <NavbarMain />
@@ -42,7 +41,7 @@ export default function Homepage() {
               <FeaturedCategories />
             </div>
             <Footer />
-          </Container>
+          </div>
         </>
       )}
     </>

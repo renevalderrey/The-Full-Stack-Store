@@ -1,4 +1,10 @@
 .container {
+  /* height: 49px; */
+  margin: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
   background: var(--clr-5-05);
   border-radius: 14px;
   box-shadow: rgb(0 0 0 / 63%) 0px 20px 30px;
