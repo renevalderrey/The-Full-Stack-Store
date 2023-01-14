@@ -4,6 +4,7 @@ import Homepage from "./Components/Homepage/Homepage";
 import FormProducts from "./Components/FormProducts/FormProducts";
 import PageProducts from "./Components/PageProducts/PageProducts";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
+import UserProfile from "./Components/UserProfile/UserProfile"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/form" element={<FormProducts />} />
           <Route path="/products" element={<PageProducts />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Routes>
       </Router>
     </div>

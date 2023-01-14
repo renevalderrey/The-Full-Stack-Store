@@ -6,12 +6,14 @@ const signIn = require("./signIn.routes");
 const logOut = require("./logOut.routes");
 const cart = require ('./cart.js');
 const products = require('./products.js');
+const categories = require('./categories.js');
 const users = require ('./users');
 const router = express.Router();
 
 router.get("/", controller.index);
 router.use('/cart', auth, cart)
 router.use('/products', products)
+router.use('/categories', categories)
 router.use('/users', users)
 router.use("/signup", signUp);
 router.use("/signin", signIn);

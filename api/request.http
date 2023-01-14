@@ -1,0 +1,19 @@
+###
+
+
+
+###
+///get product
+post http://localhost:3001/users HTTP/1.1
+
+{
+      "email": "dumar1959@hotmail.com",
+    "password": "holawieioq",
+ 
+  
+}
+
+
+###
+GET http://localhost:3001/app/users/ HTTP/1.1
+

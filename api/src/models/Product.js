@@ -35,6 +35,7 @@ const ProductsSchema = new Schema({
   },
   categories: {
     type: Array,
+    required: true,
   },
   promedio:{
     type:Number

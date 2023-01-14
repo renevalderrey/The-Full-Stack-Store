@@ -1,17 +1,14 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt-nodejs");
-var findOrCreate = require('mongoose-findorcreate')
+var findOrCreate = require("mongoose-findorcreate");
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  name: {
-    type: String,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+  name: { type: String },
+email: { type: String, required: true, unique: true },
+  code: { type: String, required: true },
+  status: { type: String, required: true, default: "UNVERIFIED" },
+
   direccion: {
     type: Array,
   },
@@ -38,7 +35,7 @@ UserSchema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-UserSchema.plugin(findOrCreate)
+UserSchema.plugin(findOrCreate);
 
 const UserModel = mongoose.model("Users", UserSchema);
 

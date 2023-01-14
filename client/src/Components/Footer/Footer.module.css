@@ -1,10 +1,15 @@
-.colors {
-  color: dimgray;
-  font-size: 17px;
-}
 .container {
-  height: 112px;
+  height: 170px;
+  padding-top: 21px;
   position: relative;
-  background: linear-gradient(#979797, rgb(255, 255, 255), #ffffff);
-  z-index: 1;
+  background: var(--clr-2);
+  border-radius: 14px 14px 0 0;
+  box-shadow: rgb(0 0 0 / 63%) 0px 20px 30px;
+  border-right: 2.1px solid var(--clr-0-025);
+  border-bottom: 2.1px solid var(--clr-0-025);
+  backdrop-filter: blur(1.4px);
+}
+.colors {
+  color: var(--clr-7-R);
+  font-size: 17px;
 }

@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
+import stl from "./UploadImages.module.css";
 
 const baseStyle = {
   flex: 1,
@@ -10,9 +11,9 @@ const baseStyle = {
   padding: "20px",
   borderWidth: 2,
   borderRadius: 2,
-  borderColor: "#eeeeee",
+  borderColor: "#bdbdbd",
   borderStyle: "dashed",
-  backgroundColor: "#fafafa",
+  backgroundColor: "#ffffff",
   color: "#bdbdbd",
   outline: "none",
   transition: "border .24s ease-in-out",
@@ -141,7 +142,9 @@ export default function UploadImages() {
         <aside style={thumbsContainer}>{thumbs}</aside>
       </div>
       <div>
-        <button onClick={() => upload()}>Upload</button>
+        <button className={stl.boton} onClick={() => upload()}>
+          Upload
+        </button>
       </div>
     </>
   );

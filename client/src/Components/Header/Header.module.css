@@ -1,6 +1,7 @@
 .container {
   height: 112px;
-  margin: 21px;
+  margin-top: 21px;
+  margin-bottom: 21px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -10,6 +11,7 @@
   border-right: 2.1px solid var(--clr-0-025);
   border-bottom: 2.1px solid var(--clr-0-025);
   backdrop-filter: blur(1.4px);
+  aspect-ratio: auto;
 }
 .containerAux {
   width: 95%;
@@ -32,8 +34,27 @@
 }
 .containerShopCart {
   justify-content: end;
+  color: var(--clr-7-R);
 }
-.carrito {
-  height: 56px;
-  margin-top: 25px;
+.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  transition: 0.2s;
+  font-size: 30px;
+  color:var(--clr-7-R);
+  border:none; 
 }
+.button:hover{
+  border:none;
+  background:var(--clr-11-R);
+  background:var(--clr-12-R);
+  color: white;
+  font-weight: bold;
+  box-shadow: 2px 2px 0 var(--clr-11-R);
+}
+

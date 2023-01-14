@@ -1,18 +1,19 @@
 //componente de productos que se renderisa en pageProducts solo 20 productos por pagina  
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getProducts } from '../../Redux/action';
+import { Link, useNavigate } from 'react-router-dom';
+import { getDetail, getProducts } from '../../Redux/action';
 
 
 export default function Productos() {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const products = useSelector(state => state.products);
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
     const [productsPerPage, setProductsPerPage] = useState(20);
     const [productsToShow, setProductsToShow] = useState([]);
-  
+    
 
 
     useSelector(state => state.getDetail);
@@ -52,7 +53,10 @@ export default function Productos() {
     function handleProductsPerPage(e) {
         setProductsPerPage(e.target.value);
     }
-
+    const handleDetail=(e)=>{
+        dispatch(getDetail(e.target.value))
+        navigate(`/product/${e.target.value}`)
+    }
     
 
 
@@ -77,12 +81,12 @@ export default function Productos() {
             <div>
                 {/* mensaje de carga mientras se renderiza los productos */}
                 
-                {products.length === 0 ? <h1>Cargando...</h1> : null}
+                {products.length === 0 ? <h1>No hay productos con este Filtro</h1> : null}
                 {/* //map para renderizar los productos */}
 
                 {productsToShow.map(product => {
                     return (
-                        <div className='card' key={product.id}>
+                        <div className='card' key={product._id}>
                             <div className='card-body'>
                                 <img src={product.image} alt={product.name} />
                                 <h5 className='card-title'>{product.name}</h5>
@@ -90,7 +94,7 @@ export default function Productos() {
                                 <p className='card-text'>{product.description.slice(0, 100)}...</p>
                                 <p className='card-text'>${product.price}</p>
                               {/* usar getDetail para detalles del producto */}
-                                <Link to={`/products/${product.id}`} className='btn btn-primary'>Ver detalles</Link>
+                                <button value={product._id} onClick={handleDetail} className='btn btn-primary'>Ver detalles</button>
                             </div>
                         </div>
                     )

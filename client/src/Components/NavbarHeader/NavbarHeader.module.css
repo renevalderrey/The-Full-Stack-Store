@@ -1,4 +1,4 @@
 .colors {
-  color: dimgray;
-  font-size: 21px;
+  color: var(--clr-10-R);
+  font-size: 17px;
 }

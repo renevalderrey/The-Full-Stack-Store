@@ -19,12 +19,6 @@ export default function FeaturedCategories() {
         <div className={stl.format}>
           <CardFeaturedCategories />
         </div>
-        <div className={stl.format}>
-          <CardFeaturedCategories />
-        </div>
-        <div className={stl.format}>
-          <CardFeaturedCategories />
-        </div>
       </div>
     </>
   );

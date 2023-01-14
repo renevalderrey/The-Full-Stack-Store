@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userSchema = require("../models/Users.js");
-
+const signUp = require ("../passport/local-auth.js");
 //create user
 router.post("/", (req, res) => {
   const user = userSchema(req.body);
@@ -9,7 +9,15 @@ router.post("/", (req, res) => {
     .save()
     .then((data) => res.json(data))
     .catch((error) => res.json({ mesagge: error.message }));
+    
 });
+// confirmar
+router.get(
+  '/confirm/:token',
+  [],
+  signUp.confirm
+);
+
 
 //get all users
 router.get("/", (req, res) => {

@@ -3,7 +3,7 @@ import axios from "axios";
 export function getProducts() {
   return async function (dispatch) {
     try {
-      const response = await axios.get('/products');
+      const response = await axios.get("/products");
       return dispatch({ type: "GET_PRODUCTS", payload: response.data });
     } catch (error) {
       return { error: error.message };
@@ -53,7 +53,7 @@ export function removeProduct(payload) {
 export function getUsers() {
   return async function (dispatch) {
     try {
-      const response = await axios.get('/users');
+      const response = await axios.get("/users");
       return dispatch({ type: "GET_USERS", payload: response.data });
     } catch (error) {
       return { error: error.message };
@@ -65,7 +65,7 @@ export function postUser(payload) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        '/users',
+        "/users",
         payload
       );
       return dispatch({ type: "POST_USER", payload: response.data });
@@ -79,7 +79,7 @@ export function postProduct(payload) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        '/products',
+        "/products",
         payload
       );
       return dispatch({ type: "POST_PRODUCT", payload: response.data });
@@ -106,7 +106,7 @@ export function postCategory(payload) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        '/category',
+        "/category",
         payload
       );
       return dispatch({ type: "POST_CATEGORY", payload: response.data });
@@ -144,11 +144,10 @@ export function cleanFilter(payload) {
 export const signUp = (payload) => {
   return async function () {
     try {
-      const res = await axios.post('/signup', payload);
+      const res = await axios.post("/signup", payload);
       res.data.message !== undefined
         ? alert(res.data.message)
         : alert("Usuario creado correctamente");
-        window.location.reload();
     } catch (error) {
       return { error: error.message };
     }
@@ -158,7 +157,7 @@ export const signUp = (payload) => {
 export const signIn = (payload) => {
   return async function (dispatch) {
     try {
-      const res = await axios.post('/signin', payload);
+      const res = await axios.post("/signin", payload);
       res.data.message !== undefined
         ? alert(res.data.message)
         : alert("Inicio de sesión correcto");
@@ -172,7 +171,7 @@ export const signIn = (payload) => {
 export const logOut = () => {
   return async function (dispatch) {
     try {
-      const res = await axios.get('/logout');
+      const res = await axios.get("/logout");
       return dispatch({ type: "LOG_OUT", payload: res.data });
     } catch (error) {
       return { error: error.message };
@@ -188,7 +187,6 @@ export function filterProductsPrice(payload) {
     payload,
   };
 }
-
 export function putCalificationRating(payload) {
   return async function (dispatch) {
     try {
@@ -200,4 +198,13 @@ export function putCalificationRating(payload) {
   };
 }
 
-
+export function getCategories() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("/categories");
+      return dispatch({ type: "GET_CATEGORIES", payload: response.data });
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
+}

@@ -56,4 +56,6 @@ code {
   --clr-8-R: #ff2800;
   --clr-9-R: #ff1400;
   --clr-10-R: #ff0000;
+  --clr-11-R:rgb(117,0,0);
+  --clr-12-R:linear-gradient(90deg, rgba(117,0,0,1) 0%, rgba(159,0,0,1) 19%, rgba(190,0,0,1) 39%, rgba(227,0,0,1) 74%, rgba(254,0,0,1) 100%);
 }
