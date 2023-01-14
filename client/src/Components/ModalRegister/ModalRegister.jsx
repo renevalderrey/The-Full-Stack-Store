@@ -34,7 +34,9 @@ const ModalRegister = ({ show, handleClose }) => {
         dispatch(signUp(sign));
         setEmail("")
         setPassword("")
+        window.location.reload();
     };
+    
     return (
         <Modal show={show} onHide={handleClose}>
             <Form className="mb-10" onSubmit={handleSubmit(onSubmit)}>
