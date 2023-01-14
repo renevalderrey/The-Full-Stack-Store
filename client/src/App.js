@@ -5,7 +5,6 @@ import FormProducts from "./Components/FormProducts/FormProducts";
 import PageProducts from "./Components/PageProducts/PageProducts";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
 
-
 function App() {
   return (
     <div className="App">

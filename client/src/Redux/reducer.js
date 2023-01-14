@@ -9,7 +9,7 @@ const initialState = {
   orders: [],
   reviews: [],
   category: [],
-  brand:[],
+  brand: [],
   loading: false,
   error: null,
   success: false,
@@ -29,18 +29,20 @@ export default function rootReducer(state = initialState, action) {
         return acc;
       }, {});
       const uniqueCategories = Object.keys(categories);
-      const marcas = state.allProducts.map((e) => e.brand).sort(function (a, b) {
-        if (a < b) return -1;
-        else return 1;
-      });
+      const marcas = state.allProducts
+        .map((e) => e.brand)
+        .sort(function (a, b) {
+          if (a < b) return -1;
+          else return 1;
+        });
       const uniqueBrands = [...new Set(marcas)];
 
       return {
         ...state,
         products: action.payload,
         allProducts: action.payload,
-        brand:uniqueBrands,
-        category: uniqueCategories
+        brand: uniqueBrands,
+        category: uniqueCategories,
       };
     case "FILTER_PRODUCTS":
       return {
@@ -160,10 +162,10 @@ export default function rootReducer(state = initialState, action) {
           products: filtrados,
         };
       }
-      case "PUT_RATING":
-        return {
-          ...state,
-        };
+    case "PUT_RATING":
+      return {
+        ...state,
+      };
     default:
       return state;
   }
