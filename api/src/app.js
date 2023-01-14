@@ -8,6 +8,7 @@ const passport = require("passport");
 const routes = require("./routes/index.routes");
 const userRoutes = require("../src/routes/users");
 const bodyParser = require("body-parser");
+
 // initializations
 const app = express();
 require("../database");
