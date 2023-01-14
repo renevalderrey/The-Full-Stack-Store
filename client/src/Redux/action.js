@@ -3,7 +3,7 @@ import axios from "axios";
 export function getProducts() {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`fullstackstore-production.up.railway.app/products`);
+      const response = await axios.get('/products');
       return dispatch({ type: "GET_PRODUCTS", payload: response.data });
     } catch (error) {
       return { error: error.message };
@@ -28,7 +28,7 @@ export function orderProducts(payload) {
 export function getDetail(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`fullstackstore-production.up.railway.app/products/${id}`);
+      const response = await axios.get(`/products/${id}`);
       return dispatch({ type: "GET_DETAIL", payload: response.data });
     } catch (error) {
       return { error: error.message };
@@ -53,7 +53,7 @@ export function removeProduct(payload) {
 export function getUsers() {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`fullstackstore-production.up.railway.app/users`);
+      const response = await axios.get('/users');
       return dispatch({ type: "GET_USERS", payload: response.data });
     } catch (error) {
       return { error: error.message };
@@ -65,7 +65,7 @@ export function postUser(payload) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `fullstackstore-production.up.railway.app/users`,
+        '/users',
         payload
       );
       return dispatch({ type: "POST_USER", payload: response.data });
@@ -79,7 +79,7 @@ export function postProduct(payload) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `fullstackstore-production.up.railway.app/products`,
+        '/products',
         payload
       );
       return dispatch({ type: "POST_PRODUCT", payload: response.data });
@@ -106,7 +106,7 @@ export function postCategory(payload) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `fullstackstore-production.up.railway.app/category`,
+        '/category',
         payload
       );
       return dispatch({ type: "POST_CATEGORY", payload: response.data });
@@ -144,7 +144,7 @@ export function cleanFilter(payload) {
 export const signUp = (payload) => {
   return async function () {
     try {
-      const res = await axios.post(`fullstackstore-production.up.railway.app/signup`, payload);
+      const res = await axios.post('/signup', payload);
       res.data.message !== undefined
         ? alert(res.data.message)
         : alert("Usuario creado correctamente");
@@ -157,7 +157,7 @@ export const signUp = (payload) => {
 export const signIn = (payload) => {
   return async function (dispatch) {
     try {
-      const res = await axios.post(`fullstackstore-production.up.railway.app/signin`, payload);
+      const res = await axios.post('/signin', payload);
       res.data.message !== undefined
         ? alert(res.data.message)
         : alert("Inicio de sesión correcto");
@@ -171,7 +171,7 @@ export const signIn = (payload) => {
 export const logOut = () => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`fullstackstore-production.up.railway.app/logout`);
+      const res = await axios.get('/logout');
       return dispatch({ type: "LOG_OUT", payload: res.data });
     } catch (error) {
       return { error: error.message };
@@ -191,7 +191,7 @@ export function filterProductsPrice(payload) {
 export function putCalificationRating(payload) {
   return async function (dispatch) {
     try {
-      const response = await axios.put(`fullstackstore-production.up.railway.app/products/rating/${payload._id}`,payload);
+      const response = await axios.put(`/products/rating/${payload._id}`,payload);
       return dispatch({ type: "PUT_RATING", payload: response.data });
     } catch (error) {
     console.log(error.message)      

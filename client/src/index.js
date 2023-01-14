@@ -7,7 +7,7 @@ import { store } from "./Redux/store";
 import reportWebVitals from "./reportWebVitals";
 
 // axios.defaults.baseURL = "http://localhost:3001";
-// axios.defaults.baseURL = process.env.REACT_APP_URL_BACK;
+axios.defaults.baseURL = process.env.REACT_APP_URL_BACK;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
