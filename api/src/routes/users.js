@@ -54,7 +54,7 @@ router.get("/confirm/:token", async (req, res) => {
 
     // Redireccionar a la confirmación
 
-    return res.redirect("http://localhost:3000");
+    return res.redirect("https://fullstackstore.vercel.app/");
   } catch (error) {
     console.log(error);
     return res.json({
