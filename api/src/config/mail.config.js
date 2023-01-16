@@ -140,12 +140,7 @@ let transporter = nodemailer.createTransport({
       
                   <!-- Footer -->
                   <div style="background-color: #282828; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                      <!-- Redes sociales -->
-                      <a href="https://www.facebook.com/" class="contA"><img src="cid:fb" class="imag" /></a>
-                      <a href="https://www.instagram.com/" class="contA"><img src="cid:ig" class="imag" /></a>
-                      <a href="https://wa.me/" class="contA"><img src="cid:ws" class="imag" /></a>
-                      <a href="fullstackstore@gmail.com.com" class="contA"><img src="cid:em" class="imag" /></a>
-                      <!-- Redes sociales -->
+                    
       
                       <h4>Soporte</h4>
                       <p style="font-size: 13px; padding: 0px 20px 0px 20px;">
