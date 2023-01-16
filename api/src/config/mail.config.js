@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const name = require("../models/Users.js");
+const logo =require("../public/images/TFSS.png")
 const mail = {
   user: "thefullstackstoree@gmail.com",
   pass: "crpujzwivvakhcqh",
@@ -26,7 +27,7 @@ const sendEmail = async (email, subject, html) => {
       subject, // Subject line
       text: "Bienvenido a The Full Stack Store", // plain text body
       html, // html body
-      attachments: [
+    //   attachments: [
         //     {
         //         filename: 'fb.png',
         //         path: 'src/public/images/fb.png',
@@ -47,12 +48,12 @@ const sendEmail = async (email, subject, html) => {
         //         path: 'src/public/images/em.png',
         //         cid: 'em'
         //     },
-        {
-          filename: "TFSS.png",
-          path: "src/public/images/TFSS.png",
-          cid: "TFSS",
-        },
-      ],
+    //     {
+    //       filename: "TFSS.png",
+    //       path: "src/public/images/TFSS.png",
+    //       cid: "TFSS",
+    //     },
+    //   ],
     });
   } catch (error) {
     console.log("Algo no va bien con el email", error);
@@ -114,7 +115,7 @@ const getTemplate = (email, token) => {
               <div style="padding: 20px 10px 20px 10px;">
                   <!-- Imagen inicial -->
                   <div style="background-color: #000000; padding: 10px 0px 10px 0px; width: 100%; text-align: center;">
-                      <img src="cid:TFSS" alt="" style="width: 200px; height: 60px;">
+                      <img src=${logo} alt="" style="width: 200px; height: 60px;">
                   </div>
                   <!-- Imagen inicial -->
       
