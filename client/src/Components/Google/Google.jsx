@@ -2,10 +2,8 @@ import React, { useEffect } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'
 
-const Google = () => {
-    const navigate = useNavigate()
+const Google = ({ handleClose }) => {
     const user = useSelector(state => state.user)
 
     useEffect(() => {
@@ -22,7 +20,7 @@ const Google = () => {
         const userGoogle = { email: res.profileObj.email }
         user.push(userGoogle)
         alert("Sesión iniciada")
-        navigate("/")
+        handleClose()
     };
 
     const onFailure = (err) => {
