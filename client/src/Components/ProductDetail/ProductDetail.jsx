@@ -30,6 +30,7 @@ const ProductDetail = () => {
             <Card.Body>
               <p>{details.description}</p>
               <p>{details.price}</p>
+              <h2>{details.calification}</h2>
             </Card.Body>
           </Card>
           <div className={s.div}>
