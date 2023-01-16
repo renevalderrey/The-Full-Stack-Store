@@ -27,33 +27,33 @@ let transporter = nodemailer.createTransport({
             subject, // Subject line
             text: "Bienvenido a The Full Stack Store", // plain text body
             html, // html body
-            attachments: [
-                {
-                    filename: 'fb.png',
-                    path: 'src/public/images/fb.png',
-                    cid: 'fb'
-                },
-                {
-                    filename: 'ig.png',
-                    path: 'src/public/images/ig.png',
-                    cid: 'ig'
-                },
-                {
-                    filename: 'ws.png',
-                    path: 'src/public/images/ws.png',
-                    cid: 'ws'
-                },
-                {
-                    filename: 'em.png',
-                    path: 'src/public/images/em.png',
-                    cid: 'em'
-                },
-                {
-                    filename: 'TFSS.png',
-                    path: 'src/public/images/TFSS.png',
-                    cid: 'TFSS'
-                }
-            ]
+            // attachments: [
+            //     {
+            //         filename: 'fb.png',
+            //         path: 'src/public/images/fb.png',
+            //         cid: 'fb'
+            //     },
+            //     {
+            //         filename: 'ig.png',
+            //         path: 'src/public/images/ig.png',
+            //         cid: 'ig'
+            //     },
+            //     {
+            //         filename: 'ws.png',
+            //         path: 'src/public/images/ws.png',
+            //         cid: 'ws'
+            //     },
+            //     {
+            //         filename: 'em.png',
+            //         path: 'src/public/images/em.png',
+            //         cid: 'em'
+            //     },
+            //     {
+            //         filename: 'TFSS.png',
+            //         path: 'src/public/images/TFSS.png',
+            //         cid: 'TFSS'
+            //     }
+            // ]
         });
 
     } catch (error) {
