@@ -88,11 +88,10 @@ export default function rootReducer(state = initialState, action) {
           products: state.products,
         };
       } else {
-   
         let filtrados = state.products.filter((e) =>
           e.categories.includes(action.payload)
         );
-   
+
         return {
           ...state,
           products: filtrados,
@@ -155,29 +154,32 @@ export default function rootReducer(state = initialState, action) {
         products: state.allProducts,
       };
     case "FILTER_PRICE":
-      let sorted= state.products
+      let sorted = state.products;
       if (action.payload === "Price") {
         return {
           ...state,
           products: sorted,
         };
       }
-      if(action.payload === "Menor a mayor") {
-     
-        sorted.sort(function (a,b) { return a.price - b.price})
-        }
-        if(action.payload === "Mayor a menor") {
-          sorted.sort(function (a,b) { return b.price - a.price})
-          }
-        return {
-          ...state,
-          products: sorted,
-        };
-      // }
-      case "PUT_RATING":
-        return {
-          ...state,
-        };
+      if (action.payload === "Menor a mayor") {
+        sorted.sort(function (a, b) {
+          return a.price - b.price;
+        });
+      }
+      if (action.payload === "Mayor a menor") {
+        sorted.sort(function (a, b) {
+          return b.price - a.price;
+        });
+      }
+      return {
+        ...state,
+        products: sorted,
+      };
+    // }
+    case "PUT_RATING":
+      return {
+        ...state,
+      };
     default:
       return state;
   }
