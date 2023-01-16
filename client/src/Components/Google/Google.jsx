@@ -17,8 +17,8 @@ const Google = () => {
     });
 
     const onSuccess = (res) => {
-        user.push(res.profileObj.email)
-        console.log(res)
+        const userGoogle = { email: res.profileObj.email }
+        user.push(userGoogle)
         alert("Sesión iniciada")
     };
 

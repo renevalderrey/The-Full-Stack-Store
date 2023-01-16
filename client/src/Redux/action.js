@@ -61,13 +61,23 @@ export function getUsers() {
   };
 }
 
+export const putUser = (id, data) => {
+  return async function (dispatch) {
+    try {
+      const res = await axios.put(`/users/${id}`, data);
+      console.log(res);
+      return dispatch({ type: "PUT_USER", payload: res.data });
+    } catch (error) {
+      console.log(error);
+      return { error: error.message };
+    }
+  };
+};
+
 export function postUser(payload) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        "/users",
-        payload
-      );
+      const response = await axios.post("/users", payload);
       return dispatch({ type: "POST_USER", payload: response.data });
     } catch (error) {
       return { error: error.message };
@@ -78,10 +88,7 @@ export function postUser(payload) {
 export function postProduct(payload) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        "/products",
-        payload
-      );
+      const response = await axios.post("/products", payload);
       return dispatch({ type: "POST_PRODUCT", payload: response.data });
     } catch (error) {
       return { error: error.message };
@@ -105,10 +112,7 @@ export function filterProductsBrand(payload) {
 export function postCategory(payload) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        "/category",
-        payload
-      );
+      const response = await axios.post("/category", payload);
       return dispatch({ type: "POST_CATEGORY", payload: response.data });
     } catch (error) {
       return { error: error.message };
@@ -190,10 +194,13 @@ export function filterProductsPrice(payload) {
 export function putCalificationRating(payload) {
   return async function (dispatch) {
     try {
-      const response = await axios.put(`/products/rating/${payload._id}`,payload);
+      const response = await axios.put(
+        `/products/rating/${payload._id}`,
+        payload
+      );
       return dispatch({ type: "PUT_RATING", payload: response.data });
     } catch (error) {
-    console.log(error.message)      
+      console.log(error.message);
     }
   };
 }

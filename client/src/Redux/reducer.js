@@ -9,7 +9,7 @@ const initialState = {
   orders: [],
   reviews: [],
   category: [],
-  brand:[],
+  brand: [],
   loading: false,
   error: null,
   success: false,
@@ -24,18 +24,20 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
     case "GET_PRODUCTS":
-      const marcas = state.allProducts.map((e) => e.brand).sort(function (a, b) {
-        if (a < b) return -1;
-        else return 1;
-      });
+      const marcas = state.allProducts
+        .map((e) => e.brand)
+        .sort(function (a, b) {
+          if (a < b) return -1;
+          else return 1;
+        });
       const uniqueBrands = [...new Set(marcas)];
       return {
         ...state,
         products: action.payload,
         allProducts: action.payload,
-        brand:uniqueBrands,
+        brand: uniqueBrands,
       };
-        case "GET_CATEGORIES":
+    case "GET_CATEGORIES":
       return {
         ...state,
         category: action.payload,
@@ -75,6 +77,10 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         products: action.payload,
       };
+    case "PUT_USER":
+      return {
+        ...state,
+      };
     case "FILTER_CATEGORY":
       if (action.payload === "Category") {
         return {
@@ -82,11 +88,11 @@ export default function rootReducer(state = initialState, action) {
           products: state.products,
         };
       } else {
-        console.log(action.payload);
+   
         let filtrados = state.products.filter((e) =>
           e.categories.includes(action.payload)
         );
-        console.log(filtrados);
+   
         return {
           ...state,
           products: filtrados,
@@ -120,17 +126,20 @@ export default function rootReducer(state = initialState, action) {
         return {
           ...state,
           user: [],
+          logged: false,
         };
       } else {
         return {
           ...state,
           user: action.payload,
+          logged: true,
         };
       }
     case "LOG_OUT":
       return {
         ...state,
         user: [],
+        logged: false,
       };
     case "SEARCH_BAR":
       let busqueda = state.allProducts.filter((e) =>
@@ -146,18 +155,25 @@ export default function rootReducer(state = initialState, action) {
         products: state.allProducts,
       };
     case "FILTER_PRICE":
+      let sorted= state.products
       if (action.payload === "Price") {
         return {
           ...state,
-          products: state.products,
-        };
-      } else {
-        let filtrados = state.products.filter((e) => e.price < action.payload);
-        return {
-          ...state,
-          products: filtrados,
+          products: sorted,
         };
       }
+      if(action.payload === "Menor a mayor") {
+     
+        sorted.sort(function (a,b) { return a.price - b.price})
+        }
+        if(action.payload === "Mayor a menor") {
+          sorted.sort(function (a,b) { return b.price - a.price})
+          }
+        return {
+          ...state,
+          products: sorted,
+        };
+      // }
       case "PUT_RATING":
         return {
           ...state,

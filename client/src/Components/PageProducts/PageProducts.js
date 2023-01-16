@@ -20,14 +20,10 @@ function PageProducts() {
   const [category, setCategory] = useState();
   const [selectedCategory, setSelectedCategory] = useState("Categoria");
   const [selectedBrand, setSelectedBrand] = useState("Marca");
+  const [selectedSort, setSelectedSort] = useState("Price");
   const [brand, setBrand] = useState();
-  //filtro por precio usando filterProductsPrice de action.js
-  const handleChangePrice = (value) => {
-    setSelectedPrice(value);
-    dispatch(filterProductsPrice(value));
-  };
-  const [selectedPrice, setSelectedPrice] = useState("Price");
-  const [price, setPrice] = useState();
+  const sort =["Menor a mayor","Mayor a menor"]
+
 
   const getBrand = () => {
     const marcas = AllProducts.map((e) => e.brand).sort(function (a, b) {
@@ -50,7 +46,7 @@ function PageProducts() {
 
   useEffect(() => {
     if (!AllProducts.length) dispatch(getProducts());
-    setFiltrados(Products);
+    // setFiltrados(Products);
     getCategories();
     getBrand();
   }, [dispatch, Products]);
@@ -63,10 +59,14 @@ function PageProducts() {
     setSelectedBrand(value);
     dispatch(filterProductsBrand(value));
   };
-
+  //filtro por precio usando filterProductsPrice de action.js
+  const handleChangePrice = (value) => {
+    setSelectedSort(value)
+    dispatch(filterProductsPrice(value));
+  };
   const handleCleanFilter = () => {
     setSelectedCategory("Categoria");
-    setSelectedBrand("Marca");
+    setSelectedBrand("Marca");   
     dispatch(cleanFilter());
   };
 
@@ -112,12 +112,9 @@ function PageProducts() {
                     <select
                       className="form-control"
                       id="exampleFormControlSelect1"
-                      value={selectedPrice}
-                      onChange={(e) => handleChangePrice(e.target.value)}
-                    >
-                      <option>Price</option>
-                      <option>Menor a mayor</option>
-                      <option>Mayor a menor</option>
+                      onChange={(e) =>handleChangePrice(e.target.value)}
+                    ><option>Price</option>
+                      {sort && sort.map((e, i) => <option key={i}>{e}</option>)}
                     </select>
                   </div>
 
@@ -132,7 +129,9 @@ function PageProducts() {
             </div>
             <div className="col-9">
               <div className="row">
-                <Productos products={filtrados} />
+           
+                    <Productos/>
+           
               </div>
             </div>
           </div>

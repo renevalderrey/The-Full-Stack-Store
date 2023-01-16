@@ -49,54 +49,6 @@ passport.use(
     }
   )
 );
-const confirm = async (req, res) => {
-  try {
-    // Obtener el token
-    const { token } = req.params;
-
-    // Verificar la data
-    const data = await getTokenData(token);
-
-    if (data === null) {
-      return res.json({
-        success: false,
-        msg: "Error al obtener data",
-      });
-    }
-
-    console.log(data);
-
-    const { email, code } = data.data;
-
-    // Verificar existencia del usuario
-    const user = (await User.findOne({ email })) || null;
-
-    if (user === null) {
-      return res.json({
-        success: false,
-        msg: "Usuario no existe",
-      });
-    }
-
-    // Verificar el código
-    if (code !== user.code) {
-      return res.redirect("/error.html");
-    }
-
-    // Actualizar usuario
-    user.status = "VERIFIED";
-    await user.save();
-
-    // Redireccionar a la confirmación
-    return res.redirect("/confirm.html");
-  } catch (error) {
-    console.log(error);
-    return res.json({
-      success: false,
-      msg: "Error al confirmar usuario",
-    });
-  }
-};
 
 passport.use(
   "local-signin",
@@ -118,7 +70,3 @@ passport.use(
     }
   )
 );
-
-module.exports = {
-  confirm,
-};
