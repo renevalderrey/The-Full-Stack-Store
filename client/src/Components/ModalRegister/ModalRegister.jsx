@@ -68,7 +68,7 @@ const ModalRegister = ({ show, handleClose }) => {
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Google onClick={handleClose}/>
+          <Google />
           <Button variant="secondary" onClick={handleClose}>
             Cancelar
           </Button>

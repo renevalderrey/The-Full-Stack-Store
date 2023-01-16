@@ -76,8 +76,8 @@ const ModalLogin = ({ show, handleClose }) => {
             Cancelar
           </button>
         </Modal.Footer>
-        <div>
-          <Google onClick={handleClose} />
+        <div onClick={handleClose}>
+          <Google />
         </div>
       </Form>
     </Modal>
