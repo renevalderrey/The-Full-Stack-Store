@@ -1,68 +1,66 @@
-const nodemailer = require('nodemailer');
-const name = require('../models/Users.js');
+const nodemailer = require("nodemailer");
+const name = require("../models/Users.js");
 const mail = {
-    user: 'thefullstackstoree@gmail.com',
-    pass: 'crpujzwivvakhcqh'
-}
+  user: "thefullstackstoree@gmail.com",
+  pass: "crpujzwivvakhcqh",
+};
 
 let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    tls: {
-        rejectUnauthorized: false
-    },
-    secure: true, // true for 465, false for other ports
-    auth: {
-      user: mail.user, // generated ethereal user
-      pass: mail.pass, // generated ethereal password
-    },
-  });
+  host: "smtp.gmail.com",
+  port: 465,
+  tls: {
+    rejectUnauthorized: false,
+  },
+  secure: true, // true for 465, false for other ports
+  auth: {
+    user: mail.user, // generated ethereal user
+    pass: mail.pass, // generated ethereal password
+  },
+});
 
-  const sendEmail = async (email, subject, html) => {
-    try {
-        
-        await transporter.sendMail({
-            from: `The Full Stacks Store<${ mail.user }>`, // sender address
-            to: email, // list of receivers
-            subject, // Subject line
-            text: "Bienvenido a The Full Stack Store", // plain text body
-            html, // html body
-            // attachments: [
-            //     {
-            //         filename: 'fb.png',
-            //         path: 'src/public/images/fb.png',
-            //         cid: 'fb'
-            //     },
-            //     {
-            //         filename: 'ig.png',
-            //         path: 'src/public/images/ig.png',
-            //         cid: 'ig'
-            //     },
-            //     {
-            //         filename: 'ws.png',
-            //         path: 'src/public/images/ws.png',
-            //         cid: 'ws'
-            //     },
-            //     {
-            //         filename: 'em.png',
-            //         path: 'src/public/images/em.png',
-            //         cid: 'em'
-            //     },
-            //     {
-            //         filename: 'TFSS.png',
-            //         path: 'src/public/images/TFSS.png',
-            //         cid: 'TFSS'
-            //     }
-            // ]
-        });
-
-    } catch (error) {
-        console.log('Algo no va bien con el email', error);
-    }
+const sendEmail = async (email, subject, html) => {
+  try {
+    await transporter.sendMail({
+      from: `The Full Stacks Store<${mail.user}>`, // sender address
+      to: email, // list of receivers
+      subject, // Subject line
+      text: "Bienvenido a The Full Stack Store", // plain text body
+      html, // html body
+      attachments: [
+        //     {
+        //         filename: 'fb.png',
+        //         path: 'src/public/images/fb.png',
+        //         cid: 'fb'
+        //     },
+        //     {
+        //         filename: 'ig.png',
+        //         path: 'src/public/images/ig.png',
+        //         cid: 'ig'
+        //     },
+        //     {
+        //         filename: 'ws.png',
+        //         path: 'src/public/images/ws.png',
+        //         cid: 'ws'
+        //     },
+        //     {
+        //         filename: 'em.png',
+        //         path: 'src/public/images/em.png',
+        //         cid: 'em'
+        //     },
+        {
+          filename: "TFSS.png",
+          path: "src/public/images/TFSS.png",
+          cid: "TFSS",
+        },
+      ],
+    });
+  } catch (error) {
+    console.log("Algo no va bien con el email", error);
   }
+};
 
-  const getTemplate = (email, token) => {
-      return `
+const getTemplate = (email, token) => {
+  return `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -161,8 +159,9 @@ let transporter = nodemailer.createTransport({
       </body>
       </html>
       `;
-  }
+};
 
-  module.exports = {
-    sendEmail,
-    getTemplate}
+module.exports = {
+  sendEmail,
+  getTemplate,
+};
