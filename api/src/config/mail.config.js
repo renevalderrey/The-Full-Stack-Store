@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const name = require("../models/Users.js");
-const logo =require("../public/images/TFSS.png")
+// const logo =require("../public/images/TFSS.png")
 const mail = {
   user: "thefullstackstoree@gmail.com",
   pass: "crpujzwivvakhcqh",
@@ -115,7 +115,7 @@ const getTemplate = (email, token) => {
               <div style="padding: 20px 10px 20px 10px;">
                   <!-- Imagen inicial -->
                   <div style="background-color: #000000; padding: 10px 0px 10px 0px; width: 100%; text-align: center;">
-                      <img src=${logo} alt="" style="width: 200px; height: 60px;">
+                      <img src="xd" alt="" style="width: 200px; height: 60px;">
                   </div>
                   <!-- Imagen inicial -->
       
