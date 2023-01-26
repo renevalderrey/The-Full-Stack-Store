@@ -1,16 +1,25 @@
 import React from "react";
 import { BarChart, Card, Subtitle, Title } from "@tremor/react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getProducts } from "../../Redux/action";
 
 const ChartDonut = () => {
+    const dispatch = useDispatch();
     const products = useSelector(state => state.products)
     const productName = products.filter(item => item.name)
     const productQuantity = products.filter(item => item.quantity)
+    console.log(productName)
+
+    useEffect(() => {
+        dispatch(getProducts());
+    }, []);
+
     const result = [{
         name: productName,
         quantity: productQuantity,
     }]
-    
+    console.log(result)
+
     return (
         <Card>
             <Title>Productos de la página</Title>
