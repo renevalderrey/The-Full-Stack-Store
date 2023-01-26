@@ -42,7 +42,7 @@ const ChartDonut = () => {
             </Subtitle>
             <DonutChart
                 data={result}
-                category='sales'
+                category='quantity'
                 dataKey='name'
                 marginTop='mt-6'
                 colors={["slate", "violet", "indigo", "rose", "cyan"]}
