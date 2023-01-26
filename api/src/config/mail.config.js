@@ -136,7 +136,7 @@ let transporter = nodemailer.createTransport({
                       <p style="margin-bottom: 50px;"><i>Atentamente:</i><br>Equipo FullStackSotore</p>
       
                       <!-- Botón -->
-                      <a class="claseBoton" href="${process.env.VERIFICATION_URL}${token}">Confirmar</a>
+                      <a class="claseBoton" href='https://fullstackstore.vercel.app/'>Confirmar</a>
                   </div>
                   <!-- Contenido principal -->
       
