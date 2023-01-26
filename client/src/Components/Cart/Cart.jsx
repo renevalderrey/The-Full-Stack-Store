@@ -27,7 +27,6 @@ export default function Cart() {
       item._id === product._id ? { ...item, qty: (item.qty += 1) } : item
     );
     setCart(pepe);
-    console.log(cart);
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
