@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BarChart, Card, Subtitle, Title } from "@tremor/react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../Redux/action";
@@ -29,7 +29,7 @@ const ChartDonut = () => {
             <BarChart
                 data={result}
                 dataKey="name"
-                categories={["Number of threatened species"]}
+                categories={["Estadística de productos"]}
                 colors={["blue"]}
                 marginTop="mt-6"
                 yAxisWidth="w-12"
