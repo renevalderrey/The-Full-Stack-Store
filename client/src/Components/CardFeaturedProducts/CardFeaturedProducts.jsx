@@ -36,7 +36,6 @@ export default function CardFeaturedProducts({ num }) {
         />
       </Link>
       <Card.Body>
-        <ButtomFavorites id={oneProduct._id} />
         <Card.Title
           style={{
             color: "#fff",
