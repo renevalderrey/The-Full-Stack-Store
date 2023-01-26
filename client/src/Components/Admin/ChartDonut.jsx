@@ -3,6 +3,10 @@ import { BarChart, Card, Subtitle, Title } from "@tremor/react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../Redux/action";
 
+const dataFormatter = (number) => {
+    return "$ " + Intl.NumberFormat("us").format(number).toString();
+  };
+
 const ChartDonut = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products)
@@ -46,6 +50,7 @@ const ChartDonut = () => {
                 categories={["Estadística de productos"]}
                 colors={["blue"]}
                 marginTop="mt-6"
+                valueFormatter={dataFormatter}
                 yAxisWidth="w-12"
             />
         </Card>

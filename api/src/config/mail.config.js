@@ -8,7 +8,7 @@ const mail = {
 
 let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 587,
+    port: 465,
     tls: {
         rejectUnauthorized: false
     },
