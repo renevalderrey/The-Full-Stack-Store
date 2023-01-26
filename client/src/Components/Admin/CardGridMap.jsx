@@ -9,35 +9,11 @@ import {
   Text,
 } from "@tremor/react";
 import React from "react";
-
-const data = [
-  {
-    title: "Sales VGA",
-    metric: "$ 21,400",
-    progress: 50,
-    target: "$ 80,000",
-    delta: "13.2%",
-    deltaType: "moderateIncrease",
-  },
-  {
-    title: "Sales Mouse",
-    metric: "$ 12,699",
-    progress: 30,
-    target: "$ 60,000",
-    delta: "13.2%",
-    deltaType: "moderateIncrease",
-  },
-  {
-    title: "Sales Drives",
-    metric: "$ 7,340",
-    progress: 20,
-    target: "$ 90,000",
-    delta: "13.2%",
-    deltaType: "moderateIncrease",
-  },
-];
+import { useSelector } from "react-redux";
 
 const CardGridMap = () => {
+  const data = useSelector(state=>state.products)
+
   return (
     <ColGrid
       numColsMd={2}
@@ -50,14 +26,13 @@ const CardGridMap = () => {
         <Card key={id} decoration="top" decorationColor="teal">
           <Flex alignItems="items-start">
             <Block>
-              <Text>{item.title}</Text>
-              <Metric>{item.metric}</Metric>
+              <Text>{item.name}</Text>
+              <Metric>{item.price}</Metric>
             </Block>
-            <BadgeDelta text={item.delta} color="orange" />
           </Flex>
           <Flex marginTop="mt-4" spaceX="space-x-2">
-            <Text>{`${item.progress}% (${item.metric})`}</Text>
-            <Text>{item.target}</Text>
+            <Text>{`${item.quantity}% (${item.price})`}</Text>
+            <Text>{item.price}</Text>
           </Flex>
           <ProgressBar
             percentageValue={item.progress}
