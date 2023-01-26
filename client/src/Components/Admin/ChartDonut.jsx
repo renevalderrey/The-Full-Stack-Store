@@ -1,33 +1,31 @@
 import React from "react";
-import { Card, DonutChart, Title } from "@tremor/react";
+import { BarChart, Card, Title } from "@tremor/react";
 
-const cities = [
-    {
-        name: 'New York',
-        sales: 1000
-    },
-    {
-        name: 'Caracas',
-        sales: 700
-    },
-    {
-        name: 'México DF',
-        sales: 500
-    }
-]
 
 const ChartDonut = () => {
+    const products = useSelector(state=>state.products)
+    const productName = products.filter(item => item.name)
+    const productQuantity = products.filter(item=>item.quantity)
+    const result =[{
+        name: productName,
+        quantity: productQuantity,
+    }]
     return (
         <Card>
-            <Title>Sales by City</Title>
-            <DonutChart
-                data={cities}
-                category='sales'
-                dataKey='name'
-                marginTop='mt-6'
-                colors={["slate", "violet", "indigo", "rose", "cyan"]}
-            />
-        </Card>
+        <Title>Productos de la página</Title>
+        <Subtitle>
+          Lista de cantidad de productos de la página
+        </Subtitle>
+        <BarChart
+          data={result}
+          dataKey="name"
+          categories={["Number of threatened species"]}
+          colors={["blue"]}
+          valueFormatter={dataFormatter}
+          marginTop="mt-6"
+          yAxisWidth="w-12"
+        />
+      </Card>
     )
 }
 
