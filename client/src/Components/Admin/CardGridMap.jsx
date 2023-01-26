@@ -9,10 +9,16 @@ import {
   Text,
 } from "@tremor/react";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getProducts } from "../../Redux/action";
 
 const CardGridMap = () => {
+  const dispatch = useDispatch();
   const data = useSelector(state=>state.products)
+
+  useEffect(() => {
+    dispatch(getProducts());
+}, []);
 
   return (
     <ColGrid
