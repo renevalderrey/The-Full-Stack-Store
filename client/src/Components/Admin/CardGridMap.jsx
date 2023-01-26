@@ -8,17 +8,17 @@ import {
   ProgressBar,
   Text,
 } from "@tremor/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../Redux/action";
 
 const CardGridMap = () => {
   const dispatch = useDispatch();
-  const data = useSelector(state=>state.products)
+  const data = useSelector(state => state.products)
 
   useEffect(() => {
     dispatch(getProducts());
-}, []);
+  }, []);
 
   return (
     <ColGrid
@@ -46,7 +46,7 @@ const CardGridMap = () => {
             color="orange"
           />
         </Card>
-      )).slice(0,5)}
+      )).slice(0, 5)}
     </ColGrid>
   );
 };
