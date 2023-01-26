@@ -1,6 +1,6 @@
 .chatbot {
   position: fixed;
-  background: transparent;
+  background: none;
   bottom: 0;
   right: 0;
   width: 400px;
@@ -10,5 +10,5 @@
   z-index: 999;
   overflow: hidden;
   transition: all 0.3s ease;
-  display: none;
+  /* display: none; */
 }
