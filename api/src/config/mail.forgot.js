@@ -1,8 +1,8 @@
 require('dotenv').config()
 const nodemailer = require ('nodemailer')
 const mail = {
-    user: process.env.AUTH_EMAIL,
-    pass: process.env.AUTH_PASS
+    user: 'thefullstackstoree@gmail.com',
+    pass: 'crpujzwivvakhcqh'
 }
 
 
@@ -11,6 +11,7 @@ let transporer = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port : 465,
     tls:{
+        minVersion: 'TLSv1',
         rejectUnauthorized: false
     },
     secure : true,

@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
-import { BarChart, Card, Subtitle, Title } from "@tremor/react";
+import { BarChart, Card, Subtitle, Title, DonutChart } from "@tremor/react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../Redux/action";
-
-const dataFormatter = (number) => {
-    return "$ " + Intl.NumberFormat("us").format(number).toString();
-  };
 
 const ChartDonut = () => {
     const dispatch = useDispatch();
@@ -44,14 +40,12 @@ const ChartDonut = () => {
             <Subtitle>
                 Lista de cantidad de productos de la página
             </Subtitle>
-            <BarChart
+            <DonutChart
                 data={result}
-                dataKey="name"
-                categories={["Estadística de productos"]}
-                colors={["blue"]}
-                marginTop="mt-6"
-                valueFormatter={dataFormatter}
-                yAxisWidth="w-12"
+                category='sales'
+                dataKey='name'
+                marginTop='mt-6'
+                colors={["slate", "violet", "indigo", "rose", "cyan"]}
             />
         </Card>
     )

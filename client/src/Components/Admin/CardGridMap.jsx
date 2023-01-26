@@ -46,7 +46,7 @@ const CardGridMap = () => {
             color="orange"
           />
         </Card>
-      ))}
+      )).slice(0,5)}
     </ColGrid>
   );
 };
