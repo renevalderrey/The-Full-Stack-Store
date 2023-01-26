@@ -5,7 +5,14 @@ function CheckBox() {
     <Form>
       {["checkbox"].map((type) => (
         <div key={`default-${type}`} className="mb-3">
-          <Form.Check type={type} id={`default-${type}`} label={`Comparar`} />
+          <Form.Check
+            style={{
+              color: "#fff",
+            }}
+            type={type}
+            id={`default-${type}`}
+            label={`Comparar`}
+          />
         </div>
       ))}
     </Form>

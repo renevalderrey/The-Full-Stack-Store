@@ -18,13 +18,20 @@ const initialState = {
   logged: false,
   admin: false,
   search: "",
-  filter: "",
+  fil: [],
+  fol: [],
+  filterCat: "",
+  filterBra: "",
 };
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
+    // case to get all products
     case "GET_PRODUCTS":
-      const marcas = state.allProducts
+      let productsFilter = action.payload.filter(
+        (ele) => ele.deleted === false
+      );
+      const marcas = productsFilter
         .map((e) => e.brand)
         .sort(function (a, b) {
           if (a < b) return -1;
@@ -33,9 +40,31 @@ export default function rootReducer(state = initialState, action) {
       const uniqueBrands = [...new Set(marcas)];
       return {
         ...state,
-        products: action.payload,
-        allProducts: action.payload,
+        products: productsFilter,
+        allProducts: productsFilter,
         brand: uniqueBrands,
+      };
+    // case to create a new product
+    case "POST_PRODUCT":
+      return {
+        ...state,
+      };
+    // case to modify a product
+    case "PUT_PRODUCT":
+      return {
+        ...state,
+      };
+    // case to delete a product
+    case "DELETE_PRODUCT":
+      return {
+        ...state,
+        products: action.payload,
+      };
+    // case to delete a user
+    case "DELETE_USER":
+      return {
+        ...state,
+        users: action.payload,
       };
     case "GET_CATEGORIES":
       return {
@@ -82,41 +111,77 @@ export default function rootReducer(state = initialState, action) {
         ...state,
       };
     case "FILTER_CATEGORY":
-      if (action.payload === "Category") {
+      let filtrados = [];
+      state.filterCat = action.payload;
+      if (state.filterBra !== 0 && state.fol.length !== 0) {
+        filtrados = state.fol.filter((e) =>
+          e.categories.includes(action.payload)
+        );
+        return {
+          ...state,
+          products: filtrados,
+          fil: filtrados,
+        };
+      } else if (state.filterCat.length !== 0 && state.filterBra.length === 0) {
+        filtrados = state.allProducts.filter((e) =>
+          e.categories.includes(action.payload)
+        );
+        return {
+          ...state,
+          products: filtrados,
+          fil: filtrados,
+        };
+      } else if (action.payload === "Category") {
         return {
           ...state,
           products: state.products,
+          fil: filtrados,
         };
       } else {
-        let filtrados = state.products.filter((e) =>
+        filtrados = state.products.filter((e) =>
           e.categories.includes(action.payload)
         );
 
         return {
           ...state,
           products: filtrados,
+          fil: filtrados,
         };
       }
     case "FILTER_BRAND":
-      if (action.payload === "Brand") {
+      let filtrado = [];
+      state.filterBra = action.payload;
+      state.fol = state.allProducts.filter((e) => e.brand === action.payload);
+      if (state.filterBra.length !== 0 && state.filterBra !== "Brand") {
+        if (state.fil.length == 0) {
+          filtrado = state.allProducts.filter(
+            (e) => e.brand === action.payload
+          );
+        } else {
+          filtrado = state.fil.filter((e) => e.brand === action.payload);
+        }
+        return {
+          ...state,
+          products: filtrado,
+        };
+      } else if (action.payload === "Brand") {
         return {
           ...state,
           products: state.products,
         };
       } else {
-        let filtrados = state.products.filter(
-          (e) => e.brand === action.payload
-        );
+        filtrado = state.products.filter((e) => e.brand === action.payload);
         return {
           ...state,
-          products: filtrados,
+          products: filtrado,
         };
       }
-    // case login
+    // case register
     case "SIGN_UP":
       return {
         ...state,
       };
+    // case login
     case "SIGN_IN":
       const userEmail = state.users.find(
         (u) => u.email === action.payload.email
@@ -130,14 +195,16 @@ export default function rootReducer(state = initialState, action) {
       } else {
         return {
           ...state,
-          user: action.payload,
+          user: userEmail,
           logged: true,
         };
       }
+    // case logout
     case "LOG_OUT":
       return {
         ...state,
         user: [],
+        cart: [],
         logged: false,
       };
     case "SEARCH_BAR":
@@ -154,6 +221,7 @@ export default function rootReducer(state = initialState, action) {
         products: state.allProducts,
       };
     case "FILTER_PRICE":
+      console.log(action.payload);
       let sorted = state.products;
       if (action.payload === "Price") {
         return {
@@ -161,12 +229,12 @@ export default function rootReducer(state = initialState, action) {
           products: sorted,
         };
       }
-      if (action.payload === "Menor a mayor") {
+      if (action.payload === "Menor") {
         sorted.sort(function (a, b) {
           return a.price - b.price;
         });
       }
-      if (action.payload === "Mayor a menor") {
+      if (action.payload === "Mayor") {
         sorted.sort(function (a, b) {
           return b.price - a.price;
         });
@@ -177,6 +245,43 @@ export default function rootReducer(state = initialState, action) {
       };
     // }
     case "PUT_RATING":
+      return {
+        ...state,
+      };
+    case "GET_REVIEWS":
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+
+    case "POST_REVIEW":
+      return {
+        ...state,
+      };
+    case "GET_RATING":
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+    case "GET_ORDERS":
+      return {
+        ...state,
+        orders: action.payload,
+      };
+    case "GET_COMENTS":
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+    case "POST_COMENT":
+      return {
+        ...state,
+      };
+    case "PUT_COMENT":
+      return {
+        ...state,
+      };
+    case "POST_RATING":
       return {
         ...state,
       };

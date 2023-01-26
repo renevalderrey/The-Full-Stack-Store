@@ -1,0 +1,93 @@
+.divContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-style: 5px;
+}
+.divCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--clr-9-R);
+  flex-direction: row;
+  width: 50%;
+  height: 150px;
+  margin: 5px;
+  border-radius: 5px;
+  /* background-color: white;
+    opacity: 0.5; */
+  backdrop-filter: blur(5px);
+}
+.img {
+  overflow: hidden;
+  width: 30%;
+  height: 100%;
+  margin-left: 0px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+.buton1 {
+  border: 2px solid var(--clr-9-R);
+  color: var(--text-color);
+  background-color: aliceblue;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+}
+.buton2 {
+  border: 2px solid var(--border);
+  color: var(--clr-9-R);
+  background-color: aliceblue;
+  border-radius: 5px;
+}
+.buton3 {
+  color: rgb(255, 0, 0);
+  margin-bottom: 22%;
+  margin-right: 0px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 800;
+  font-size: larger;
+}
+.title {
+  width: 40%;
+}
+.price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 30%;
+}
+.h2 {
+  font-weight: bold;
+  color: aliceblue;
+  background-color: black;
+  opacity: 0.8;
+  border: 2px solid var(--clr-9-R);
+  padding: 2px;
+  border-radius: 5px;
+}
+.backbuton {
+  display: flex;
+  justify-content: space-around;
+}
+.h1 {
+  font-weight: bold;
+  color: var(--clr-9-R);
+  background-color: black;
+  width: 50%;
+  opacity: 0.8;
+  padding: 2px;
+  border-radius: 5px;
+}
+.divTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.paypal {
+  border: 2px solid black;
+}

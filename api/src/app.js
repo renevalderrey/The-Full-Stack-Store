@@ -8,6 +8,7 @@ const passport = require("passport");
 const routes = require("./routes/index.routes");
 const userRoutes = require("../src/routes/users");
 const bodyParser = require("body-parser");
+
 // initializations
 const app = express();
 require("../database");
@@ -21,8 +22,8 @@ app.use(express.json());
 
 // middlewares
 app.use(morgan("dev"));
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(
   session({
     secret: "mysecretsession",
@@ -35,7 +36,7 @@ app.use(passport.session());
 
 // routes
 app.use(cors());
-app.use('/', routes);
+app.use("/", routes);
 app.use("/api", userRoutes);
 
 module.exports = app;

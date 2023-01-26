@@ -34,4 +34,18 @@ module.exports = {
       console.log(error);
     }
   },
+  deleteDocument: async (id) => {
+    try {
+      await ProductsModel.findByIdAndUpdate({ _id: id }, { deleted: true });  
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  recoverDocument: async (id) => {
+    try {
+      await ProductsModel.findByIdAndUpdate({ _id: id }, { deleted: false });  
+    } catch (error) {
+      console.log(error)
+    }
+  },
 }

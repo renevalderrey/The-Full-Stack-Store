@@ -4,9 +4,10 @@ const productSchema = require("../models/Product");
 const {
   putProduct,
   putProductCalification,
+  deleteDocument,
+  recoverDocument,
 } = require("../constrollers/productsController");
 
-// Ruta para obtener todos los productos en la base de datos
 router.get("/", (req, res) => {
   productSchema
     .find()
@@ -14,7 +15,6 @@ router.get("/", (req, res) => {
     .catch((error) => res.json({ mesagge: error }));
 });
 
-// Ruta para obtener un producto específico por su ID
 router.get("/:id", (req, res) => {
   productSchema
     .findById(req.params.id)
@@ -22,7 +22,6 @@ router.get("/:id", (req, res) => {
     .catch((error) => res.json({ message: error }));
 });
 
-// Ruta para crear un nuevo producto
 router.post("/", (req, res) => {
   const product = productSchema(req.body);
   product
@@ -31,16 +30,17 @@ router.post("/", (req, res) => {
     .catch((error) => res.json({ message: error.message }));
 });
 
-// Ruta para actualizar un producto existente por su ID
 router.put("/:id", (req, res) => {
-  const id = req.params.id;
-  const product = req.body;
-  putProduct(id, product)
-    .then((product) => res.json(product))
-    .catch((error) => res.json({ message: error }));
+  const { id } = req.params;
+  try {
+    productSchema
+      .findByIdAndUpdate(id, req.body)
+      .then((data) => res.status(200).json(data));
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
 });
 
-// Ruta para actualizar la calificación de un producto existente por su ID
 router.put("/rating/:id", (req, res) => {
   const id = req.params.id;
   const product = req.body;
@@ -49,13 +49,46 @@ router.put("/rating/:id", (req, res) => {
     .catch((error) => res.json({ message: error }));
 });
 
-// Ruta para eliminar un producto existente por su ID
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
   productSchema
     .remove({ _id: id })
     .then((data) => res.json(data))
     .catch((error) => res.json({ mesagge: error }));
+});
+
+router.put("/delete/:id", (req, res) => {
+  const { id } = req.params;
+  deleteDocument(id)
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ mesagge: error }));
+});
+
+router.put("/recover/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  recoverDocument(id)
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ mesagge: error }));
+});
+
+//get rating por id
+router.get("/rating/:id", (req, res) => {
+  const { id } = req.params;
+  productSchema
+    .findById(id)
+    .then((product) => res.json(product.rating))
+    .catch((error) => res.json({ message: error }));
+});
+
+//get coment por id de producto
+
+router.get("/coments/:id", (req, res) => {
+  const { id } = req.params;
+  productSchema
+    .findById(id)
+    .then((product) => res.json(product.coments))
+    .catch((error) => res.json({ message: error }));
 });
 
 module.exports = router;

@@ -1,85 +1,146 @@
-import React, { useState } from "react";
-import Nav from "react-bootstrap/Nav";
-import stl from "./NavbarHeader.module.css";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { logOut, getUsers } from "../../Redux/action";
-import ModalLogin from "../ModalLogin/ModalLogin";
-import ModalRegister from "../ModalRegister/ModalRegister";
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import { useEffect } from "react";
-import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
+import ModalSign from "../ModalSign/ModalSign";
+import {
+  Container,
+  Dropdown,
+  DropdownButton,
+  ButtonGroup,
+  Nav,
+  Button,
+} from "react-bootstrap";
+import LightMode from "../LightMode/LightMode";
 
 export default function NavbarHeader() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
   const user = useSelector((state) => state.user);
-  const logged = useSelector(state => state.logged);
+  const idLocalStorge = localStorage.getItem("id")
+  const userLocalStorage = localStorage.getItem("admin")
   const handleClose = () => setShow(false);
-  const handleClose2 = () => setShow2(false);
   const handleShow = () => setShow(true);
-  const handleShow2 = () => setShow2(true);
-
+  
   useEffect(() => {
     dispatch(getUsers());
   }, []);
 
   const signOut = () => {
     dispatch(logOut());
-    navigate("/")
+    localStorage.removeItem("user")
+    navigate("/");
     window.location.reload();
   };
 
-  const onClickProfile = () => {
-    navigate("/profile")
+  const onClickAdmin = () => {
+    navigate("/admin");
   }
 
+  const onClickProfile = () => {
+    navigate("/profile");
+  };
+
   const onClickFavorites = () => {
-    navigate("/favorites")
-  }
+    navigate("/favorites");
+  };
 
   return (
     <>
-      <Container fluid="xxl">
-        <Nav className="justify-content-end" activeKey="/home">
+      <Container fluid>
+        <Nav className="justify-content-end" activeKey="/">
           <Nav.Item>
-            <Nav.Link className={stl.colors} href="/compare">
-              Comparar
-            </Nav.Link>
+            <LightMode />
           </Nav.Item>
-          {user.length === 0 && logged === false ? (
+          {userLocalStorage?.length === 4 ? (
+            <Nav.Item>
+              <Button
+                className="m-1"
+                href="/admin"
+                variant="outline-warning"
+                style={{
+                  border: "var(--border)",
+                  color: "var(--text-color)",
+                }}
+              >
+                <i className="bi bi-star "></i> Admin
+              </Button>
+            </Nav.Item>
+          ) : (<></>)}
+          {!idLocalStorge ? (
             <>
               <Nav.Item>
-                <Nav.Link className={stl.colors} onClick={handleShow2}>
-                  Registrarse
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link className={stl.colors} onClick={handleShow}>
-                  Ingresar
-                </Nav.Link>
+                <Button
+                  className="m-1"
+                  variant="outline-warning"
+                  onClick={handleShow}
+                  style={{
+                    border: "var(--border)",
+                    color: "var(--text-color)",
+                  }}
+                >
+                  <i className="bi bi-box-arrow-in-right "></i> Ingresar
+                </Button>
               </Nav.Item>
             </>
           ) : (
             <>
               <ButtonGroup>
-                <DropdownButton as={ButtonGroup} title="Usuario" id="bg-nested-dropdown" >
-                  <Dropdown.Item eventKey="1" onClick={onClickFavorites}>Favoritos</Dropdown.Item>
-                  <Dropdown.Item eventKey="2" onClick={onClickProfile}>Mi perfil</Dropdown.Item>
-                  <Dropdown.Item eventKey="3" onClick={signOut}>Cerrar sesión</Dropdown.Item>
+                <DropdownButton
+                  className="m-1"
+                  as={ButtonGroup}
+                  title="Mi cuenta"
+                  id="bg-nested-dropdown"
+                  variant="outline-warning"
+                  style={{
+                    backgroundColor: "var(--background-color)",
+                    backdropFilter: "blur(5px)",
+                    border: "var(--border)",
+                    color: "var(--text-color)",
+                    height: "38px",
+                  }}
+                >
+                  <Dropdown.Item
+                    eventKey="1"
+                    onClick={onClickFavorites}
+                    style={{
+                      backgroundColor: "var(--background-color)",
+                      border: "var(--border)",
+                      color: "var(--text-color)",
+                    }}
+                  >
+                    Favoritos
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="2"
+                    onClick={onClickProfile}
+                    style={{
+                      backgroundColor: "var(--background-color)",
+                      border: "var(--border)",
+                      color: "var(--text-color)",
+                    }}
+                  >
+                    Mi perfil
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="3"
+                    onClick={signOut}
+                    style={{
+                      backgroundColor: "var(--background-color)",
+                      border: "var(--border)",
+                      color: "var(--text-color)",
+                    }}
+                  >
+                    Cerrar sesión
+                  </Dropdown.Item>
                 </DropdownButton>
               </ButtonGroup>
             </>
           )}
         </Nav>
       </Container>
-      <ModalLogin show={show} handleClose={handleClose} />
-      <ModalRegister show={show2} handleClose={handleClose2} />
+      <ModalSign show={show} handleClose={handleClose} />
     </>
   );
 }

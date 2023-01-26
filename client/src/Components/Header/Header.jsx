@@ -1,43 +1,60 @@
 import React from "react";
-import Logo from "../../Image/TFSS.png";
+import { useNavigate } from "react-router-dom";
+import { Navbar, Container, Image, Row, Col, Button } from "react-bootstrap";
 import SearchBarMain from "../SearchBarMain/SearchBarMain";
 import NavbarHeader from "../NavbarHeader/NavbarHeader";
-import stl from "./Header.module.css";
-import { Link,useNavigate } from "react-router-dom";
-import Container from "react-bootstrap/Container";
 
 export default function Header() {
-  const navigate = useNavigate()
-  const handleCart=()=>{
-    navigate("/cart")
-  }
+  const navigate = useNavigate();
+  const handleCart = () => {
+    localStorage.getItem("cart")
+    navigate("/cart");
+  };
   return (
     <>
-      <Container fluid="xxl">
-        <div className={stl.container}>
-          <div className={stl.containerAux}>
-            <div className={stl.containerLogo}>
-              <Link to={"/"}>
-                <img src={Logo} alt="logo" className={stl.logo} />
-              </Link>
-            </div>
-            <div className={stl.containerBars}>
-              <div className={stl.auxContainer}>
+      <Container className="mt-3">
+        <Navbar
+          style={{
+            backgroundColor: "var(--background-color)",
+            backdropFilter: "blur(5px)",
+            border: "var(--border)",
+            boxShadow: "var(--box-shadow)",
+            zIndex: "1",
+          }}
+          expand="lg"
+          className="rounded-4"
+        >
+          <Container>
+            <Col xs={2} className="p-3">
+              <Navbar.Brand href="/">
+                <Image fluid alt="logo" src="/tfss.svg" width="150" />
+              </Navbar.Brand>
+            </Col>
+            <Col xs={8}>
+              <Row className="mt-1">
                 <SearchBarMain />
-              </div>
-              <div className={stl.auxContainer}>
+              </Row>
+              <Row>
                 <NavbarHeader />
-              </div>
-            </div>
-            <div className={stl.containerShopCart}>
-              <button className={stl.button}onClick={handleCart}>
-              <i className="bi bi-cart2"></i>
-                {/* Cart */}
-              </button>
-              Cart
-            </div>
-          </div>
-        </div>
+              </Row>
+            </Col>
+            <Col xs={2}>
+              <Button
+                variant="outline-warning"
+                onClick={handleCart}
+                style={{
+                  border: "var(--border)",
+                  color: "var(--text-color)",
+                  fontSize: "42px",
+                  width: "84px",
+                  height: "84px",
+                }}
+              >
+                <i className="bi bi-cart2"></i>
+              </Button>
+            </Col>
+          </Container>
+        </Navbar>
       </Container>
     </>
   );

@@ -8,13 +8,18 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+<<<<<<< HEAD
+      "src": "tfss.svg",
+      "type": "image/svg",
+=======
+      "src": "https://img.freepik.com/vector-gratis/hermoso-personaje-pajaro-fuego-fenix-plumas-naranjas-ardientes-ilustracion-dibujos-animados-vectoriales-pajaro-magico-mitologia-fenix-cuento-hadas-fuego-aislado-sobre-fondo-blanco_107791-11544.jpg?w=2000",
       "type": "image/png",
+>>>>>>> 83f3fd973662c91cfeeb8988194b3a30480da8fa
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
-      "type": "image/png",
+      "src": "tfss.svg",
+      "type": "image/svg",
       "sizes": "512x512"
     }
   ],

@@ -2,6 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import stl from "./UploadImages.module.css";
+import { Container, Form, Button } from "react-bootstrap";
 
 const baseStyle = {
   flex: 1,
@@ -20,7 +21,7 @@ const baseStyle = {
 };
 
 const focusedStyle = {
-  borderColor: "#2196f3",
+  borderColor: "#FF3C00ff",
 };
 
 const acceptStyle = {
@@ -142,9 +143,13 @@ export default function UploadImages() {
         <aside style={thumbsContainer}>{thumbs}</aside>
       </div>
       <div>
-        <button className={stl.boton} onClick={() => upload()}>
+        <Button
+          className="mt-3 mb-3"
+          variant="outline-danger"
+          onClick={() => upload()}
+        >
           Upload
-        </button>
+        </Button>
       </div>
     </>
   );

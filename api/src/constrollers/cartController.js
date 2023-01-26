@@ -1,6 +1,7 @@
 const CartModel = require("../models/Cart.js");
 
 module.exports = {
+  //crea y guarda el historial de carros de compra
   postCart: async function (cart) {
     try {
       const cartHecho = await CartModel.findOne({ user_id: cart.user_id });

@@ -1,67 +1,69 @@
-const nodemailer = require("nodemailer");
-const name = require("../models/Users.js");
-// const logo =require("../public/images/TFSS.png")
+const nodemailer = require('nodemailer');
+require("dotenv").config();
+const name = require('../models/Users.js');
 const mail = {
-  user: "thefullstackstoree@gmail.com",
-  pass: "crpujzwivvakhcqh",
-};
+    user: process.env.AUTH_EMAIL,
+    pass: process.env.AUTH_PASS
+}
 
 let transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  tls: {
-    rejectUnauthorized: false,
-  },
-  secure: true, // true for 465, false for other ports
-  auth: {
-    user: mail.user, // generated ethereal user
-    pass: mail.pass, // generated ethereal password
-  },
-});
+    host: "smtp.gmail.com",
+    port: 465,
+    tls: {
+        rejectUnauthorized: false
+    },
+    secure: true, 
+    auth: {
+      user: mail.user, 
+      pass: mail.pass, 
+    },
+  });
 
-const sendEmail = async (email, subject, html) => {
-  try {
-    await transporter.sendMail({
-      from: `The Full Stacks Store<${mail.user}>`, // sender address
-      to: email, // list of receivers
-      subject, // Subject line
-      text: "Bienvenido a The Full Stack Store", // plain text body
-      html, // html body
-    //   attachments: [
-        //     {
-        //         filename: 'fb.png',
-        //         path: 'src/public/images/fb.png',
-        //         cid: 'fb'
-        //     },
-        //     {
-        //         filename: 'ig.png',
-        //         path: 'src/public/images/ig.png',
-        //         cid: 'ig'
-        //     },
-        //     {
-        //         filename: 'ws.png',
-        //         path: 'src/public/images/ws.png',
-        //         cid: 'ws'
-        //     },
-        //     {
-        //         filename: 'em.png',
-        //         path: 'src/public/images/em.png',
-        //         cid: 'em'
-        //     },
-    //     {
-    //       filename: "TFSS.png",
-    //       path: "src/public/images/TFSS.png",
-    //       cid: "TFSS",
-    //     },
-    //   ],
-    });
-  } catch (error) {
-    console.log("Algo no va bien con el email", error);
+  const sendEmail = async (email, subject, html) => {
+    try {
+        
+        await transporter.sendMail({
+            from: `The Full Stacks Store<${ mail.user }>`, // sender address
+            to: email, // list of receivers
+            subject, // Subject line
+            text: "Bienvenido a The Full Stack Store", // plain text body
+            html, // html body
+            attachments: [
+                {
+                    filename: 'fb.png',
+                    path: 'src/public/images/fb.png',
+                    cid: 'fb'
+                },
+                {
+                    filename: 'ig.png',
+                    path: 'src/public/images/ig.png',
+                    cid: 'ig'
+                },
+                {
+                    filename: 'ws.png',
+                    path: 'src/public/images/ws.png',
+                    cid: 'ws'
+                },
+                {
+                    filename: 'em.png',
+                    path: 'src/public/images/em.png',
+                    cid: 'em'
+                },
+                {
+                    filename: 'TFSS.png',
+                    path: 'src/public/images/TFSS.png',
+                    cid: 'TFSS'
+                }
+            ]
+        });
+
+    } catch (error) {
+        console.log('Algo no va bien con el email', error);
+    }
   }
-};
 
-const getTemplate = (email, token) => {
-  return `
+  const getTemplate = (email, token) => {
+      return `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -115,7 +117,7 @@ const getTemplate = (email, token) => {
               <div style="padding: 20px 10px 20px 10px;">
                   <!-- Imagen inicial -->
                   <div style="background-color: #000000; padding: 10px 0px 10px 0px; width: 100%; text-align: center;">
-                      <img src="xd" alt="" style="width: 200px; height: 60px;">
+                      <img src="cid:TFSS" alt="" style="width: 200px; height: 60px;">
                   </div>
                   <!-- Imagen inicial -->
       
@@ -133,13 +135,18 @@ const getTemplate = (email, token) => {
                       <p style="margin-bottom: 50px;"><i>Atentamente:</i><br>Equipo FullStackSotore</p>
       
                       <!-- Botón -->
-                      <a class="claseBoton" href="http://localhost:3001/users/confirm/${token}">Confirmar</a>
+                      <a class="claseBoton" href="${process.env.VERIFICATION_URL}${token}">Confirmar</a>
                   </div>
                   <!-- Contenido principal -->
       
                   <!-- Footer -->
                   <div style="background-color: #282828; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                    
+                      <!-- Redes sociales -->
+                      <a href="https://www.facebook.com/" class="contA"><img src="cid:fb" class="imag" /></a>
+                      <a href="https://www.instagram.com/" class="contA"><img src="cid:ig" class="imag" /></a>
+                      <a href="https://wa.me/" class="contA"><img src="cid:ws" class="imag" /></a>
+                      <a href="fullstackstore@gmail.com.com" class="contA"><img src="cid:em" class="imag" /></a>
+                      <!-- Redes sociales -->
       
                       <h4>Soporte</h4>
                       <p style="font-size: 13px; padding: 0px 20px 0px 20px;">
@@ -160,9 +167,8 @@ const getTemplate = (email, token) => {
       </body>
       </html>
       `;
-};
+  }
 
-module.exports = {
-  sendEmail,
-  getTemplate,
-};
+  module.exports = {
+    sendEmail,
+    getTemplate}

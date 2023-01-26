@@ -1,26 +1,30 @@
-
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const getToken = (payload) => {
-    return jwt.sign({
-        data: payload
-    }, 'SECRET', { expiresIn: '1h' });
-}
+  return jwt.sign(
+    {
+      data: payload,
+    },
+    process.env.JWT_KEY,
+    { expiresIn: "1h" }
+  );
+};
 
 const getTokenData = (token) => {
-    let data = null;
-    jwt.verify(token, 'SECRET', (err, decoded) => {
-        if(err) {
-            console.log('Error al obtener data del token');
-        } else {
-            data = decoded;
-        }
-    });
+  let data = null;
+  jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
+    if (err) {
+      console.log("Error al obtener data del token");
+    } else {
+      data = decoded;
+    }
+  });
 
-    return data;
-}
+  return data;
+};
 
 module.exports = {
-    getToken,
-    getTokenData
-}
+  getToken,
+  getTokenData,
+};

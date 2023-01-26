@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const userSchema = require("../models/Users.js");
-const signUp = require("../passport/local-auth.js");
 const { getTokenData } = require("../config/jwt.config");
+const { deleteDocument, recoverDocument } = require("../constrollers/user.controllers");
 
 //create user
 router.post("/", (req, res) => {
@@ -102,4 +102,20 @@ router.delete("/:id", (req, res) => {
     .catch((error) => res.json({ mesagge: error }));
 });
 
+//borrado logico
+router.put("/delete/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id)
+  deleteDocument(id)
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ mesagge: error }));
+});
+router.put("/recover/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id)
+ 
+  recoverDocument(id)
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ mesagge: error }));
+});
 module.exports = router;

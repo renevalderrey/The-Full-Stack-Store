@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// action to get all products
 export function getProducts() {
   return async function (dispatch) {
     try {
@@ -10,6 +11,54 @@ export function getProducts() {
     }
   };
 }
+
+// action to get a specific product by ID
+export function getDetail(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`/products/${id}`);
+      return dispatch({ type: "GET_DETAIL", payload: response.data });
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
+}
+
+// action to create a new product
+export function postProduct(payload) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post("/products", payload);
+      return dispatch({ type: "POST_PRODUCT", payload: response.data });
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
+}
+
+// action to update a existing product by its ID
+export const putProduct = (id, data) => {
+  return async function (dispatch) {
+    try {
+      const res = await axios.put(`/products/${id}`, data);
+      return dispatch({ type: "PUT_PRODUCT", payload: res.data });
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
+};
+
+// action to delete a existing product by its ID
+export const deleteProduct = (id) => {
+  return async function (dispatch) {
+    try {
+      const res = await axios.delete(`/products/${id}`);
+      return dispatch({ type: "DELETE_PRODUCT", payload: res.data });
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
+};
 
 export function filterProducts(payload) {
   return {
@@ -22,17 +71,6 @@ export function orderProducts(payload) {
   return {
     type: "ORDER_PRODUCTS",
     payload,
-  };
-}
-
-export function getDetail(id) {
-  return async function (dispatch) {
-    try {
-      const response = await axios.get(`/products/${id}`);
-      return dispatch({ type: "GET_DETAIL", payload: response.data });
-    } catch (error) {
-      return { error: error.message };
-    }
   };
 }
 
@@ -50,6 +88,7 @@ export function removeProduct(payload) {
   };
 }
 
+// action to get all users
 export function getUsers() {
   return async function (dispatch) {
     try {
@@ -65,10 +104,8 @@ export const putUser = (id, data) => {
   return async function (dispatch) {
     try {
       const res = await axios.put(`/users/${id}`, data);
-      console.log(res);
       return dispatch({ type: "PUT_USER", payload: res.data });
     } catch (error) {
-      console.log(error);
       return { error: error.message };
     }
   };
@@ -85,16 +122,16 @@ export function postUser(payload) {
   };
 }
 
-export function postProduct(payload) {
+export const deleteUser = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post("/products", payload);
-      return dispatch({ type: "POST_PRODUCT", payload: response.data });
+      const res = await axios.delete(`/users/${id}`);
+      return dispatch({ type: "USER_PRODUCT", payload: res.data });
     } catch (error) {
       return { error: error.message };
     }
   };
-}
+};
 
 export function filterProductsCategory(payload) {
   return {
@@ -102,6 +139,7 @@ export function filterProductsCategory(payload) {
     payload,
   };
 }
+
 export function filterProductsBrand(payload) {
   return {
     type: "FILTER_BRAND",
@@ -143,8 +181,7 @@ export function cleanFilter(payload) {
   };
 }
 
-// login - authentication
-
+// action to register a user
 export const signUp = (payload) => {
   return async function () {
     try {
@@ -158,23 +195,36 @@ export const signUp = (payload) => {
   };
 };
 
+// action to login a user
 export const signIn = (payload) => {
   return async function (dispatch) {
+    const id = localStorage.getItem("id");
     try {
-      const res = await axios.post("/signin", payload);
-      res.data.message !== undefined
-        ? alert(res.data.message)
-        : alert("Inicio de sesión correcto");
-      return dispatch({ type: "SIGN_IN", payload });
+      if (id) {
+        return dispatch({ type: "SIGN_IN", payload });
+      } else {
+        const res = await axios.post("/signin", payload);
+        res.data.message !== undefined
+          ? alert(res.data.message)
+          : alert("Inicio de sesión correcto");
+        const result = res.data.filter((item) => item.email === payload.email);
+        localStorage.setItem("id", JSON.stringify(result[0]._id));
+        localStorage.setItem("user", JSON.stringify(result));
+        localStorage.setItem("cart", JSON.stringify(result[0].cart));
+        localStorage.setItem("admin", JSON.stringify(result[0].admin))
+        return dispatch({ type: "SIGN_IN", payload });
+      }
     } catch (error) {
       alert(error.request.response);
     }
   };
 };
 
+// action to log out a user
 export const logOut = () => {
   return async function (dispatch) {
     try {
+      localStorage.clear();
       const res = await axios.get("/logout");
       return dispatch({ type: "LOG_OUT", payload: res.data });
     } catch (error) {
@@ -183,14 +233,121 @@ export const logOut = () => {
   };
 };
 
-//filtro por precio maximo y minimo en el front
-
+// filter by maximum and minimun price on the front
 export function filterProductsPrice(payload) {
   return {
     type: "FILTER_PRICE",
     payload,
   };
 }
+
+export function getCategories() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("/categories");
+      return dispatch({ type: "GET_CATEGORIES", payload: response.data });
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
+}
+
+export function getRating(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`/products/rating/${id}`);
+      return dispatch({ type: "GET_RATING", payload: response.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function getReviews(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`/products/reviews/${id}`);
+      return dispatch({ type: "GET_REVIEWS", payload: response.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function postReview(payload) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post("/products/reviews", payload);
+      return dispatch({ type: "POST_REVIEW", payload: response.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+//enviar rating de productor por id de producto
+
+export function putRating(payload) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(
+        `/products/rating/${payload._id}`,
+        payload
+      );
+      return dispatch({ type: "PUT_RATING", payload: response.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function postComment(payload) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post("/products/coment", payload);
+      return dispatch({ type: "POST_COMENT", payload: response.data });
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
+}
+
+export function putComent(payload) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(
+        `/products/coment/${payload._id}`,
+        payload
+      );
+      return dispatch({ type: "PUT_COMENT", payload: response.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function postRating(payload) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post("/products/rating", payload);
+      return dispatch({ type: "POST_RATING", payload: response.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function getCalificationRating(_id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`/products/rating/${_id}`);
+      return dispatch({ type: "GET_RATING", payload: response.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
 export function putCalificationRating(payload) {
   return async function (dispatch) {
     try {
@@ -205,13 +362,15 @@ export function putCalificationRating(payload) {
   };
 }
 
-export function getCategories() {
+//get coments por id de producto
+
+export function getComents(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.get("/categories");
-      return dispatch({ type: "GET_CATEGORIES", payload: response.data });
+      const response = await axios.get(`/products/coment/${id}`);
+      return dispatch({ type: "GET_COMENTS", payload: response.data });
     } catch (error) {
-      return { error: error.message };
+      console.log(error.message);
     }
   };
 }

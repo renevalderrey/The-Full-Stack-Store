@@ -11,7 +11,7 @@ const ProductsSchema = new Schema({
   },
   description: {
     type: String,
-  },  
+  },
   brand: {
     type: String,
   },
@@ -37,9 +37,16 @@ const ProductsSchema = new Schema({
     type: Array,
     required: true,
   },
-  promedio:{
-    type:Number
-  }
+  promedio: {
+    type: Number,
+  },
+  deleted: {
+    type: Boolean,
+    default: false,
+  },
+  orders: {
+    type: Array,
+  },
 });
 
 const ProductsModel = mongoose.model("products", ProductsSchema);

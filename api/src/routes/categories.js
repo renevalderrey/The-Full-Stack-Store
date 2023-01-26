@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const CategoriesSchema = require("../models/Categories");
-const { getCategories } = require("../constrollers/categories.controllers");
+const { getCategories, deleteDocument, recoverDocument } = require("../constrollers/categories.controllers");
 
 router.get("/", (req, res) => {
   CategoriesSchema.find()
@@ -14,5 +14,19 @@ router.post("/", (req, res) => {
     .then((data) => res.json(data))
     .catch((error) => res.json({ mesagge: error }));
 });
-
+router.put("/delete/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id)
+  deleteDocument(id)
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ mesagge: error }));
+});
+router.put("/recover/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id)
+ 
+  recoverDocument(id)
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ mesagge: error }));
+});
 module.exports = router;

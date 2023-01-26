@@ -9,11 +9,13 @@ import {
   filterProductsPrice,
 } from "../../Redux/action";
 import Header from "../Header/Header";
+import NavbarMain from "../NavbarMain/NavbarMain";
 import Footer from "../Footer/Footer";
 import Productos from "../Products/Productos";
-import NavbarMain from "../NavbarMain/NavbarMain";
 
-function PageProducts() {
+import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+
+export default function PageProducts() {
   const Products = useSelector((state) => state.products);
   const AllProducts = useSelector((state) => state.allProducts);
   const [filtrados, setFiltrados] = useState();
@@ -22,8 +24,6 @@ function PageProducts() {
   const [selectedBrand, setSelectedBrand] = useState("Marca");
   const [selectedSort, setSelectedSort] = useState("Price");
   const [brand, setBrand] = useState();
-  const sort =["Menor a mayor","Mayor a menor"]
-
 
   const getBrand = () => {
     const marcas = AllProducts.map((e) => e.brand).sort(function (a, b) {
@@ -61,12 +61,13 @@ function PageProducts() {
   };
   //filtro por precio usando filterProductsPrice de action.js
   const handleChangePrice = (value) => {
-    setSelectedSort(value)
+    setSelectedSort(value);
     dispatch(filterProductsPrice(value));
   };
   const handleCleanFilter = () => {
     setSelectedCategory("Categoria");
-    setSelectedBrand("Marca");   
+    setSelectedBrand("Marca");
+    dispatch(filterProductsPrice("Price"));
     dispatch(cleanFilter());
   };
 
@@ -75,71 +76,122 @@ function PageProducts() {
       <div>
         <Header />
         <NavbarMain />
-        <div className="container">
-          <div className="row">
-            <div className="col-3">
-              <div className="card">
-                <div className="card-header">
-                  <h5>Filtros</h5>
-                </div>
-                <div className="card-body">
-                  <div className="form-group">
-                    <label htmlFor="exampleFormControlSelect1">Categoria</label>
-                    <select
+        <Container className="mt-5">
+          <Row>
+            <Col>
+              <Card
+                style={{
+                  backgroundColor: "var(--background-color)",
+                  backdropFilter: "blur(5px)",
+                  border: "var(--border)",
+                  boxShadow: "var(--box-shadow)",
+                }}
+                className="rounded-4"
+              >
+                <Card.Header>
+                  <h4
+                    className="mt-3"
+                    style={{
+                      color: "var(--text-color)",
+                    }}
+                  >
+                    Filtros
+                  </h4>
+                </Card.Header>
+                <Card.Body>
+                  <Form.Group>
+                    <Form.Label
+                      style={{
+                        color: "#fff",
+                      }}
+                      className="mb-3"
+                    >
+                      Categoria
+                    </Form.Label>
+                    <Form.Select
                       className="form-control"
                       id="exampleFormControlSelect1"
                       value={selectedCategory}
                       onChange={(e) => handleChangeCategory(e.target.value)}
+                      style={{
+                        border: "var(--border)",
+                      }}
                     >
                       <option>Categoria</option>
-                      {category && category.map((e,i) => <option key={i}>{e}</option>)}
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="exampleFormControlSelect1">Marca</label>
-                    <select
+                      {category &&
+                        category.map((e, i) => <option key={i}>{e}</option>)}
+                    </Form.Select>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label
+                      style={{
+                        color: "#fff",
+                      }}
+                      className="mt-3 mb-3"
+                    >
+                      Marca
+                    </Form.Label>
+                    <Form.Select
                       className="form-control"
                       id="exampleFormControlSelect1"
                       value={selectedBrand}
                       onChange={(e) => handleChangeBrand(e.target.value)}
+                      style={{
+                        border: "var(--border)",
+                      }}
                     >
                       <option>Marca</option>
-                      {brand && brand.map((e, i) => <option key={i}>{e}</option>)}
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="exampleFormControlSelect1">Precio</label>
-                    <select
+                      {brand &&
+                        brand.map((e, i) => <option key={i}>{e}</option>)}
+                    </Form.Select>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label
+                      style={{
+                        color: "#fff",
+                      }}
+                      className="mt-3 mb-3"
+                    >
+                      Precio
+                    </Form.Label>
+                    <Form.Select
                       className="form-control"
                       id="exampleFormControlSelect1"
-                      onChange={(e) =>handleChangePrice(e.target.value)}
-                    ><option>Price</option>
-                      {sort && sort.map((e, i) => <option key={i}>{e}</option>)}
-                    </select>
-                  </div>
+                      onChange={(e) => handleChangePrice(e.target.value)}
+                      style={{
+                        border: "var(--border)",
+                      }}
+                    >
+                      <option defaultValue="Price">Price</option>
+                      <option value="Mayor">Mayor a menor</option>
+                      <option value="Menor">Menor a mayor</option>
+                    </Form.Select>
+                  </Form.Group>
 
-                  <button
-                    className="btn btn-primary"
+                  <Button
+                    className="mt-5"
+                    variant="outline-warning"
                     onClick={() => handleCleanFilter()}
+                    style={{
+                      border: "var(--border)",
+                      color: "var(--text-color)",
+                    }}
                   >
                     Limpiar filtros
-                  </button>
-                </div>
-              </div>
-            </div>
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+
             <div className="col-9">
               <div className="row">
-           
-                    <Productos/>
-           
+                <Productos />
               </div>
             </div>
-          </div>
-        </div>
+          </Row>
+        </Container>
         <Footer />
       </div>
     </>
   );
 }
-
-export default PageProducts;

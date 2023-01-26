@@ -33,18 +33,31 @@ const UserSchema = new Schema({
   },
   admin: {
     type: Boolean,
+    default: false,
   },
   favoritos: {
     type: Array,
   },
+  deleted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 UserSchema.methods.encryptPassword = (password) => {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+  try {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+  } catch (error) {
+    return { error: error.message };
+  }
 };
 
 UserSchema.methods.comparePassword = function (password) {
-  return bcrypt.compareSync(password, this.password);
+  try {
+    return bcrypt.compareSync(password, this.password);
+  } catch (error) {
+    return { error: error.message };
+  }
 };
 
 UserSchema.plugin(findOrCreate);

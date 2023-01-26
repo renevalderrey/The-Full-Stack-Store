@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const router = Router();
 const passport = require("passport");
-const userSchema = require("../models/Users.js");
 
 router.post(
   "/",
@@ -13,7 +12,7 @@ router.post(
   })
 );
 
-router.get("/", async (req, res) => {
+router.get("/", (req, res) => {
   const { email, password } = req.body;
   try {
     !email || !password

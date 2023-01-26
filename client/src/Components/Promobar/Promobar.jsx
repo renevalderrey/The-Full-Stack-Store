@@ -1,16 +1,22 @@
+
 import React from "react";
-import stl from "./Promobar.module.css";
-import { Link } from "react-router-dom";
-import Container from "react-bootstrap/Container";
+import { Container, Card, Figure, Navbar, Row, Image } from "react-bootstrap";
 
 export default function Promobar() {
   return (
-    <Container fluid="xxl">
-      <Link to="/form">
-        <div className={stl.container}>
-          <div className={stl.title}>!Crea un nuevo producto aqui!</div>
-        </div>
-      </Link>
-    </Container>
+    <>
+      <Container className="mt-3 ">
+        <Figure.Image
+          src="./image/promo1.png"
+          style={{
+            backgroundColor: "rgba(33, 37, 41,0.5)",
+            backdropFilter: "blur(5px)",
+            border: "var(--border)",
+            boxShadow: "var(--box-shadow)",
+          }}
+          className="rounded-4"
+        />
+      </Container>
+    </>
   );
 }

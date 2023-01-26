@@ -1,14 +1,13 @@
 import { useForm } from "react-hook-form";
 import { postProduct } from "../../Redux/action";
 import { useDispatch } from "react-redux";
-import Form from "react-bootstrap/Form";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import stl from "./FormProducts.module.css";
 import UploadImages from "../UploadImages/UploadImages";
-import Container from "react-bootstrap/Container";
+import { useNavigate } from "react-router-dom";
+import { Container, Form, Button } from "react-bootstrap";
 
 export default function MyForm() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {
@@ -18,27 +17,28 @@ export default function MyForm() {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(postProduct(data));
+    alert("Se ha creado el producto correctamente");
+    navigate("/admin");
   };
+
   return (
     <>
-      <Container fluid="lg">
-        <Header />
+      <Container fluid="xxl">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={stl.title}>
-            <h1>Crear Producto</h1>
-          </div>
+          <div className={stl.title}></div>
           <div>
             <Form.Group className={stl.container} controlId="formBasicEmail">
               <div className={stl.item}>
                 <Form.Label>
-                  Name:
+                  Nombre:
                   <Form.Control
                     type="text"
                     {...register("name", { required: true })}
                   />
-                  {errors.name?.type === "required" && <p>name is required </p>}
+                  {errors.name?.type === "required" && (
+                    <p>se requiere nombre </p>
+                  )}
                 </Form.Label>
               </div>
               <div className={stl.item}>
@@ -46,32 +46,32 @@ export default function MyForm() {
               </div>
               <div className={stl.item}>
                 <Form.Label>
-                  Brand:
+                  Marca:
                   <Form.Control type="text" {...register("brand")} />
                 </Form.Label>
               </div>
               <div className={stl.item}>
                 <Form.Label>
-                  Price:
+                  Precio:
                   <Form.Control
                     type="number"
                     step="0.01"
                     {...register("price", { required: true })}
                   />
                   {errors.price?.type === "required" && (
-                    <p>price is required </p>
+                    <p>se requiere precio </p>
                   )}
                 </Form.Label>
               </div>
               <div className={stl.item}>
                 <Form.Label>
-                  Quantity:
+                  Cantidad:
                   <Form.Control
                     type="number"
                     {...register("quantity", { required: true })}
                   />
                   {errors.quantity?.type === "required" && (
-                    <p>quantity is required </p>
+                    <p>se requiere cantidad </p>
                   )}
                 </Form.Label>
               </div>
@@ -83,43 +83,42 @@ export default function MyForm() {
               </div>
               <div className={stl.item}>
                 <Form.Label>
-                  Favorites:
+                  Favoritos:
                   <Form.Control type="text" {...register("favorites")} />
                 </Form.Label>
               </div>
               <div className={stl.item}>
                 <Form.Label>
-                  Calification:
+                  Calificación:
                   <Form.Control type="text" {...register("calification")} />
                 </Form.Label>
               </div>
               <div className={stl.item}>
                 <Form.Label>
-                  Comments:
+                  Comentarios:
                   <Form.Control type="text" {...register("comments")} />
                 </Form.Label>
               </div>
               <div className={stl.item}>
                 <Form.Label>
-                  Categories:
+                  Categorias:
                   <Form.Control type="text" {...register("categories")} />
                 </Form.Label>
               </div>
               <div className={stl.item}>
                 <Form.Label>
-                  Description:
+                  Descripción:
                   <Form.Control type="text" {...register("description")} />
                 </Form.Label>
               </div>
               <div>
-                <button className={stl.boton} type="submit">
-                  Submit
-                </button>
+                <Button className="mt-3" variant="outline-danger" type="submit">
+                  Crear
+                </Button>
               </div>
             </Form.Group>
           </div>
         </form>
-        <Footer />
       </Container>
     </>
   );

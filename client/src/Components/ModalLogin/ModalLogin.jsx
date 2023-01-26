@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
-import Google from "../Google/Google";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { signIn } from "../../Redux/action";
-import stl from "./ModalLogin.module.css";
+import { Form, Modal, Nav, Button } from "react-bootstrap";
 
 const ModalLogin = ({ show, handleClose }) => {
   const dispatch = useDispatch();
@@ -35,52 +32,125 @@ const ModalLogin = ({ show, handleClose }) => {
     setEmail("");
     setPassword("");
   };
-
+  
   return (
-    <Modal centered show={show} onHide={handleClose}>
-      <Form className="mb-10" onSubmit={handleSubmit(onSubmit)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Inicia sesión</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group className="mb-8" controlId="formBasicEmail">
-            <div>
-              <Form.Label>
-                Email
-                <Form.Control
-                  type="email"
-                  {...register("name", { required: true })}
-                  onChange={emailChangeHandler}
-                  value={email}
-                />
-                {errors.name?.type === "required" && <p>Email is required </p>}
-              </Form.Label>
-            </div>
-            <Form.Label>
-              Contraseña
+    <Form
+      fluid
+      className="m-1"
+      onSubmit={handleSubmit(onSubmit)}
+      style={{
+        backdropFilter: "blur(5px)",
+        border: "var(--border)",
+        width: "490px",
+      }}
+    >
+      <Modal.Header
+        style={{
+          backgroundColor: "var(--background-color)",
+          backdropFilter: "blur(5px)",
+        }}
+      >
+        <Modal.Title
+          style={{
+            color: "var(--clr-7-R)",
+          }}
+        >
+          Inicia sesión
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body
+        style={{
+          backgroundColor: "var(--background-color)",
+          backdropFilter: "blur(5px)",
+        }}
+      >
+        <Form.Group className="mb-8" controlId="formBasicEmail">
+          <div>
+            <Form.Label
+              style={{
+                color: "var(--text-color)",
+              }}
+            >
+              Email
               <Form.Control
-                type="password"
-                {...register("password", { required: true })}
-                onChange={passwordChangeHandler}
-                value={password}
+                type="email"
+                {...register("name", { required: true })}
+                onChange={emailChangeHandler}
+                value={email}
+                style={{
+                  border: "var(--border)",
+                }}
               />
-              {errors.name?.type === "required" && <p>Password is required </p>}
+              {errors.name?.type === "required" && (
+                <p
+                  style={{
+                    color: "var(--text-color)",
+                  }}
+                >
+                  No ingresaste tu email
+                </p>
+              )}
             </Form.Label>
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <button className={stl.boton2} onClick={handleClose} type="submit">
-            Iniciar sesión
-          </button>
-          <button className={stl.boton} onClick={handleClose}>
-            Cancelar
-          </button>
-        </Modal.Footer>
-        <div>
-          <Google handleClose={handleClose} />
-        </div>
-      </Form>
-    </Modal>
+          </div>
+          <Form.Label
+            style={{
+              color: "var(--text-color)",
+            }}
+          >
+            Contraseña
+            <Form.Control
+              type="password"
+              {...register("password", { required: true })}
+              onChange={passwordChangeHandler}
+              value={password}
+              style={{
+                border: "var(--border)",
+              }}
+            />
+            {errors.name?.type === "required" && (
+              <p
+                style={{
+                  color: "var(--text-color)",
+                }}
+              >
+                No ingresaste tu contraseña
+              </p>
+            )}
+          </Form.Label>
+        </Form.Group>
+      </Modal.Body>
+      <Modal.Footer
+        style={{
+          backgroundColor: "var(--background-color)",
+          backdropFilter: "blur(5px)",
+        }}
+      >
+        <Nav.Item>
+          <Nav.Link
+            href="/home"
+            style={{
+              color: "#ffc800",
+            }}
+            className="m-2"
+          >
+            Olvidé mi contraseña
+          </Nav.Link>
+        </Nav.Item>
+        <Button
+          onClick={handleClose}
+          type="submit"
+          variant="outline-warning"
+          style={{
+            border: "1px solid #ff3c00",
+            color: "var(--clr-7-R)",
+            width: "170px",
+          }}
+          className="m-1"
+        >
+          Iniciar sesión
+        </Button>
+      </Modal.Footer>
+    </Form>
   );
 };
 

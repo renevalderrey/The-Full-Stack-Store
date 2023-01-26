@@ -1,36 +1,71 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-import stl from "./OurBrands.module.css";
-import Container from "react-bootstrap/Container";
+import { Col, Container, Row } from "react-bootstrap";
 
 export default function OurBrands() {
   return (
     <>
-      <Container fluid="xxl">
-        <h1>¡En Fullstack Store encuentra las mejores marcas!</h1>
-        <div className={stl.container}>
-          <Link className={stl.format}>
-            <Card style={{ width: "10rem", border: "none" }}>
-              <Card.Img variant="top" src="./image/New Project.png" />
-            </Card>
-          </Link>
-          <Link className={stl.format}>
-            <Card style={{ width: "10rem", border: "none" }}>
-              <Card.Img variant="top" src="./image/New Project1.png" />
-            </Card>
-          </Link>
-          <Link className={stl.format}>
-            <Card style={{ width: "10rem", border: "none" }}>
-              <Card.Img variant="top" src="./image/New Project2.png" />
-            </Card>
-          </Link>
-          <Link className={stl.format}>
-            <Card style={{ width: "10rem", border: "none" }}>
-              <Card.Img variant="top" src="./image/New Project3.png" />
-            </Card>
-          </Link>
-        </div>
+      <h1 style={{ color: "#fff" }}>
+        ¡En Fullstack Store encuentra las mejores marcas!
+      </h1>
+      <Container
+        style={{
+          backgroundColor: "var(--background-color)",
+          backdropFilter: "blur(5px)",
+          border: "var(--border)",
+          boxShadow: "var(--box-shadow)",
+        }}
+        expand="lg"
+        className="rounded-4 m-3"
+      >
+        <Row>
+          <Col>
+            <Link>
+              <Card.Img
+                style={{ width: "10rem", border: "none" }}
+                variant="top"
+                src="./image/New Project.png"
+              />
+            </Link>
+          </Col>
+          <Col>
+            <Link>
+              <Card.Img
+                style={{ width: "10rem", border: "none" }}
+                variant="top"
+                src="./image/New Project1.png"
+              />
+            </Link>
+          </Col>
+          <Col>
+            <Link>
+              <Card.Img
+                style={{ width: "10rem", border: "none" }}
+                variant="top"
+                src="./image/New Project2.png"
+              />
+            </Link>
+          </Col>
+          <Col>
+            <Link>
+              <Card.Img
+                style={{ width: "10rem", border: "none" }}
+                variant="top"
+                src="./image/New Project3.png"
+              />
+            </Link>
+          </Col>
+          <Col>
+            <Link>
+              <Card.Img
+                style={{ width: "10rem", border: "none" }}
+                variant="top"
+                src="./image/New Project4.png"
+              />
+            </Link>
+          </Col>
+        </Row>
       </Container>
     </>
   );
