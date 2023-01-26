@@ -15,8 +15,22 @@ const ChartDonut = () => {
     }, []);
 
     const result = [{
-        name: productName,
-        quantity: productQuantity,
+        name: productName[0],
+        quantity: productQuantity[0],
+    },
+    {
+        name: productName[1],
+        quantity: productQuantity[1]
+    },
+    {
+        name: productName[2],
+        quantity: productQuantity[2],
+    }, {
+        name: productName[3],
+        quantity: productQuantity[3]
+    }, {
+        name: productName[4],
+        quantity: productQuantity[4]
     }]
     console.log(result)
 
