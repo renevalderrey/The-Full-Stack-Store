@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Header from "../Header/Header";
 import NavbarMain from "../NavbarMain/NavbarMain";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import RatingComents from "../RatingComents/RatingComents";
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import MostrarComentarios from "../MostrarComentarios/MostrarComentarios";
@@ -12,6 +12,7 @@ const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const details = useSelector((state) => state.detail);
+  const [cartNew, setCartNew] = useState([]);
 
   const handleAddCart = (product) => {
     let itemInCart = cartNew.find(ele => ele._id === product._id)
