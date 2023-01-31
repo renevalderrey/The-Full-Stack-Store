@@ -24,7 +24,7 @@ const Paypal = ({ price }) => {
 
   const onCancel = (data) => {
     alert("Has cancelado la compra");
-    window.location.href = "http://localhost:3000/";
+    window.location.reload
   };
 
   return (

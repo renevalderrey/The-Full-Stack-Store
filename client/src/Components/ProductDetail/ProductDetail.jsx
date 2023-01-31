@@ -12,10 +12,22 @@ const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const details = useSelector((state) => state.detail);
-  const navigate = useNavigate();
-  const handleCart = () => {
-    navigate("/cart");
-  };
+
+  const handleAddCart = (product) => {
+    let itemInCart = cartNew.find(ele => ele._id === product._id)
+    let pepe = cartNew
+    if (itemInCart) {
+      pepe?.map(item => item._id === product._id ? { ...item, qty: item.qty += 1 } : item)
+      setCartNew(pepe)
+      console.log(pepe)
+      localStorage.setItem("cart", JSON.stringify(pepe))
+    } else {
+      product.qty = 1
+      pepe = [...pepe, product]
+      setCartNew(pepe)
+      localStorage.setItem("cart", JSON.stringify(pepe))
+    }
+  }
 
   useEffect(() => {
     dispatch(getDetail(id));
@@ -112,7 +124,7 @@ const ProductDetail = () => {
                 <Button
                   className="mb-3"
                   variant="outline-warning"
-                  onClick={handleCart}
+                  onClick={() => handleAddCart(details)}
                   style={{
                     border: "var(--border)",
                     color: "var(--text-color)",
