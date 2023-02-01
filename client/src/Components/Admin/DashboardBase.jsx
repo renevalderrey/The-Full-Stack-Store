@@ -13,6 +13,7 @@ import CardGridMap from "./CardGridMap";
 import ChartDonut from "./ChartDonut";
 import TableUser from "./TableUser";
 import TableProduct from "./TableProduct";
+import { Link } from "react-router-dom";
 
 const DashboardBase = () => {
   const [selectedView, setSelectedView] = useState(1);
@@ -20,7 +21,9 @@ const DashboardBase = () => {
   return (
     <Card>
       <Title marginTop="mt-10">
-        <img alt="logo" src="/tfss2.svg" width="300" />
+        <Link to='/'>
+          <img alt="logo" src="/tfss2.svg" width="300" />
+        </Link>
       </Title>
       <Metric color="teal" marginTop="mt-10" text>
         Perfil de Administrador
