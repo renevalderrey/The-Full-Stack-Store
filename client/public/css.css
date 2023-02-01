@@ -8,3 +8,7 @@
   overflow: hidden;
   transition: all 0.3s ease; */
 }
+
+.chatbot:active {
+  z-index: -1;
+}
