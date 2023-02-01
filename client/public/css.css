@@ -1,6 +1,6 @@
-/* .chatbot {
+.chatbot {
   position: fixed;
-  background: none;
+  /* background: none;
   bottom: 0;
   right: 0;
   width: 400px;
@@ -9,5 +9,5 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 999;
   overflow: hidden;
-  transition: all 0.3s ease;
-} */
+  transition: all 0.3s ease; */
+}
